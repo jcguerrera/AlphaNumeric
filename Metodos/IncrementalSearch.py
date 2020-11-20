@@ -1,11 +1,11 @@
 import sympy as sm
-import math
 import sys
-import json
-import base64
 import pandas as pd
 
-def incremental_search(xi, delta, nIter, funcion):
+
+def incremental_search(funcion,xi, delta, nIter):
+    print('funcion',funcion)
+
     if delta <= 0:
         print("El delta debe ser positivo")
         sys.exit(1)
@@ -19,17 +19,15 @@ def incremental_search(xi, delta, nIter, funcion):
         contador = 0
         while (contador < nIter):
             if currentF*f_a<0:
-                results[contador] = [x_a,current_X]
+                results[contador] = [float(x_a),float(current_X)]
             x_a = current_X
             current_X = current_X + delta
             f_a = currentF
             currentF = sm.sympify(funcion).subs(x,current_X)
             contador = contador + 1
 
-        print_function(results)
-        aux = json.dumps(results)
+        return results
 
-        print(aux)
     else:
         print("Las iteraciones deben ser un numero positivo")
         sys.exit(1)
@@ -49,4 +47,4 @@ def print_function(results):
     df = pd.DataFrame(data, index=index)
     print(df)
 
-incremental_search(-3,0.5,100,'ln((sin(x)^2)+1)-(1/2)')
+#incremental_search("ln((sin(x)^2)+1)-(1/2)",-3,0.5,100)

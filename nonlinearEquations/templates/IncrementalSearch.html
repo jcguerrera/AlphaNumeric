@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Bisection</title>
+    <title>Busquedas Incrementales</title>
 </head>
 
 <div class="contenedor">
@@ -11,33 +11,28 @@
 
         <div class="col-md-8">
             <div class="card">
-                <h1>Biseccion</h1>
-                <form method="POST" action="/biseccion/" class="form">
+                <h1>Busquedas Incrementales</h1>
+                <form method="POST" action="/busquedas/" class="form">
                     {% csrf_token %}
+
                     <div class="form-row">
-                        <div class="form-group col-md-12">
-                            <label>Funcion</label>
+                        <div class="form-group col-md-6">
+                             <label>Funcion</label>
                             <input type="text" class="form-control" placeholder=""  name="f_function" required />
                         </div>
-                    </div>
-                    <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>x0</label>
-                            <input type="number" class="form-control" placeholder=""  name="x0_value" required />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>x1</label>
-                            <input type="number" class="form-control" placeholder=""  name="x1_value"  required/>
+                            <label>XI</label>
+                            <input type="number" class="form-control" placeholder=""  name="x_value"  required/>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Numero Iteraciones</label>
-                            <input type="number" class="form-control" placeholder="" name="nIter" step="any" required />
+                            <label>Delta</label>
+                            <input type="number" class="form-control" placeholder="" name="delta" step="any" required />
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Tolerancia</label>
-                            <input type="number" class="form-control" placeholder="" name="tol" step="any"  required />
+                            <label>Numero de Iteraciones</label>
+                            <input type="number" class="form-control" placeholder="" name="nIter" step="any"  required />
                         </div>
                     </div>
                     <div class="form-row">
@@ -54,10 +49,7 @@
                                         <tr>
                                             <th>Iteracion</th>
                                             <th>XI</th>
-                                            <th>XM</th>
                                             <th>XS</th>
-                                            <th>FXM</th>
-                                            <th>Error</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,9 +59,6 @@
                                                     <th>{{ key}}</th>
                                                     <th>{{ value.0}}</th>
                                                     <th>{{ value.1}}</th>
-                                                    <th>{{ value.2}}</th>
-                                                    <th>{{ value.3}}</th>
-                                                    <th>{{ value.4}}</th>
                                                 </tr>
                                             {% endfor %}
                                          </ul>
