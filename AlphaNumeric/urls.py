@@ -20,6 +20,7 @@ from AlphaNumeric import views as AlphaNumeric_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('/', AlphaNumeric_views.index, name='alpha_views'),
     path('lagrangeP/', Interpolation_views.lagrangeP, name='inter_lagrangeP'),
-    path('index/', AlphaNumeric_views.index, name='alpha_views'),
+    path('vandermonde/', Interpolation_views.vandermondeP, name='inter_vandermonde'),
 ]

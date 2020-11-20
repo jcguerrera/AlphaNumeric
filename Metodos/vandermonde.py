@@ -1,4 +1,4 @@
-from GaussianElimination import *
+from Metodos.GaussianElimination import *
 
 def vandermonde(x, y):
     matriz = []
@@ -12,10 +12,10 @@ def vandermonde(x, y):
         fila+=1
     print('A:')
     printMatriz(matriz)
-    totalGaussianElimination(matriz, y)
+    return totalGaussianElimination(matriz, y)
     
 
-x = [-1, 0, 3, 4]
-y = [15.5, 3, 8, 1]
+#x = [-1, 0, 3, 4]
+#y = [15.5, 3, 8, 1]
 
-vandermonde(x,y)
+#vandermonde(x,y)

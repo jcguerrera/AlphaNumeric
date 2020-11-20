@@ -59,7 +59,8 @@ def totalGaussianElimination(A, b):
             mult = Ab[i][k]/Ab[k][k]
             for j in range(k, n+1):
                 Ab[i][j] = Ab[i][j] - mult*Ab[k][j]
-    print('x ',sortResult(backSubstitution(Ab), order))
+    #retorna las x            
+    return(sortResult(backSubstitution(Ab), order))
 
 def searchTheBiggestandSwap(Ab, n, k, order):
     row = k

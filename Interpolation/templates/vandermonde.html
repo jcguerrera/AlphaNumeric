@@ -5,8 +5,8 @@
 
         <div class="col-md-8">
             <div class="card">
-                <h1>LAGRANGE</h1>
-                <form method="POST" action="/lagrangeP/">
+                <h1>VANDERMONDE</h1>
+                <form method="POST" action="/vandermonde/">
                     {% csrf_token %}
                     <label for=" ">Ingrese los valores de los vectores</label><br>
                     <label for=" ">-Use la "," para separar los valores</label><br>
@@ -18,7 +18,7 @@
                         <button type="submit" class="btn btn-outline-success btn-block">Ingresar</button>
                     </div>
                 </form>
-                <h5>Polinomio:</h5>
+                <h5>Coeficientes</h5>
                 <h5>{{polinomio}}</h5>
             </div>
         </div>
