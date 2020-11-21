@@ -129,14 +129,14 @@ A = [[2, -1, 0, 3],
 b = [[1], [1], [1], [1]]
 b2 = [1,1,1,1]
 
-print('simple Gaussian Elimination')
-Ab = simpleGaussianElimination(A,b)
-print('----------------------')
-print('Partial Gaussian Elimination')
-Ab = partialGaussianElimination(A,b2)
-print('----------------------')
-print('Total Gaussian Elimination')
-totalGaussianElimination(A,b2)
+#print('simple Gaussian Elimination')
+#Ab = simpleGaussianElimination(A,b)
+#print('----------------------')
+#print('Partial Gaussian Elimination')
+#Ab = partialGaussianElimination(A,b2)
+#print('----------------------')
+#print('Total Gaussian Elimination')
+#totalGaussianElimination(A,b2)
 
 
 

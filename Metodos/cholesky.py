@@ -66,6 +66,6 @@ def backSubstitution(A, b):
 A = [[4, 12, -16],
     [12, 37, -43],
     [-16, -43, 98]]
-A = np.array(A)
-b = np.ones(3)
-cholesky(A, b)   
+#A = np.array(A)
+#b = np.ones(3)
+#cholesky(A, b)   

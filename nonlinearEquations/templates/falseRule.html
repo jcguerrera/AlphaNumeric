@@ -1,0 +1,90 @@
+{% extends 'layouts/master.html' %} {% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Bisection</title>
+</head>
+
+<div class="contenedor">
+    <br>
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+            <div class="card">
+                <h1>Regla Falsa</h1>
+                <form method="POST" action="/reglafalsa/" class="form">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label>Funcion</label>
+                            <input type="text" class="form-control" placeholder="" name="f_function" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>a</label>
+                            <input type="number" step="0.01" class="form-control" placeholder="" name="a" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>b</label>
+                            <input type="number" step="0.01" class="form-control" placeholder="" name="b" required/>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Numero Iteraciones</label>
+                            <input type="number" class="form-control" placeholder="" name="nIter" step="any" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Tolerancia</label>
+                            <input type="number" class="form-control" placeholder="" name="tol" step="any" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-outline-success btn-block">Calcular</button>
+                        </div>
+                    </div>
+                </form>
+                <h5>Respuesta:</h5>
+                <label for="">{{message}}</label>
+                <ul>
+                    {% if data %}
+                    <div class="row justify-content-center">
+                        <table class="table table-striped text-center table-BusquedasIncrementales">
+                            <thead>
+                                <tr>
+                                    <th>Iteracion</th>
+                                    <th>a</th>
+                                    <th>c</th>
+                                    <th>b</th>
+                                    <th>FC</th>
+                                    <th>Error</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ul>
+                                    {% for key,value in data.items %}
+                                    <tr>
+                                        <th>{{ key}}</th>
+                                        <th>{{ value.0}}</th>
+                                        <th>{{ value.1}}</th>
+                                        <th>{{ value.2}}</th>
+                                        <th>{{ value.3}}</th>
+                                        <th>{{ value.4}}</th>
+                                    </tr>
+                                    {% endfor %}
+                                </ul>
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

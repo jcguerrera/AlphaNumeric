@@ -26,5 +26,6 @@ urlpatterns = [
     path('vandermonde/', Interpolation_views.vandermondeP, name='inter_vandermonde'),
     path('biseccion/', NoLinearEquations.bisectionP, name='no_lineal_biseccion'),
     path('busquedas/',NoLinearEquations.incremental_SearchP, name ='no_lineal_Search'),
+    path('reglafalsa/',NoLinearEquations.falseRuleP, name ='no_lineal_reglafalsa'),
     path('index/', AlphaNumeric_views.index, name='alpha_views'),
 ]

@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 from Metodos.Bisection import bisection
+from Metodos.falseRule import falseRule
 from Metodos.IncrementalSearch import incremental_search
 
 
@@ -42,3 +43,19 @@ def incremental_SearchP(request):
         return render(request, "IncrementalSearch.html", {'data': data})
 
     return render(request, "IncrementalSearch.html", {'data': ''})
+
+def falseRuleP(request):
+    if 'f_function' in request.POST:
+        funcion = request.POST.get('f_function')
+        a = request.POST.get('a')
+        b = request.POST.get('b')
+        nIter = request.POST.get('nIter')
+        iter = request.POST.get('tol')
+
+        print(funcion, a, b, nIter, iter)
+        data = falseRule(float(a), float(b), str(funcion), float(nIter), float(iter))
+        print(data)
+
+        return render(request, "falseRule.html", {'data': data,'message':data['message']})
+
+    return render(request, "falseRule.html", {'data': ''})

@@ -39,4 +39,4 @@ def bisection(funcion, xi, xs, nIter, iter):
         print('el intervalo no sirve')
         sys.exit(1)
 
-print(bisection('ln((sin(x)^2)+1)-(1/2)',0,1,100,0.0000001))
+#print(bisection('ln((sin(x)^2)+1)-(1/2)',0,1,100,0.0000001))
