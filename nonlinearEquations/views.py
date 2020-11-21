@@ -24,7 +24,6 @@ def bisectionP(request):
 
 
 def incremental_SearchP(request):
-    print('hola')
     if 'f_function' in request.POST:
         funcion = request.POST.get('f_function')
         xi = request.POST.get('x_value')

@@ -12,7 +12,7 @@ def vandermonde(x, y):
         fila+=1
     print('A:')
     printMatriz(matriz)
-    return totalGaussianElimination(matriz, y)
+    return totalGaussianElimination(matriz, y)[0]
     
 
 #x = [-1, 0, 3, 4]

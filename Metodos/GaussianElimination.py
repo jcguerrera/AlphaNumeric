@@ -2,8 +2,9 @@ import numpy as np
 import math 
 
 def simpleGaussianElimination(A, b):
-    Ab = concatenar(A, b)
+    Ab = concatenarMatriz(A, b)
     n = len(Ab)
+    result = []
     for k in range(n):
         print('step ',k)
         print(Ab)
@@ -14,6 +15,8 @@ def simpleGaussianElimination(A, b):
             for j in range(k, n+1):
                 Ab[i][j] = Ab[i][j] - mult*Ab[k][j]
     print('x ',backSubstitution(Ab))
+    result=Ab
+    return(backSubstitution(Ab),result)
 
 def searchAndSwapZero(Ab, n, i):
     for j in range(i+1,n):
@@ -26,6 +29,8 @@ def searchAndSwapZero(Ab, n, i):
 
 def partialGaussianElimination(A, b):
     Ab = concatenarMatriz(A, b)
+    order = []
+    result = []
     n = len(Ab)
     for k in range(n):
         print('step ',k)
@@ -36,6 +41,8 @@ def partialGaussianElimination(A, b):
             for j in range(k, n+1):
                 Ab[i][j] = Ab[i][j] - mult*Ab[k][j]
     print('X ',backSubstitution(Ab))
+    result=Ab
+    return(backSubstitution(Ab),result)
 
 def searchBiggerandSwap(Ab, n, i):
     row = i
@@ -49,6 +56,7 @@ def searchBiggerandSwap(Ab, n, i):
 
 def totalGaussianElimination(A, b):
     order = []
+    result = []
     Ab = concatenarMatriz(A, b)
     n = len(Ab)
     for k in range(n):
@@ -59,8 +67,9 @@ def totalGaussianElimination(A, b):
             mult = Ab[i][k]/Ab[k][k]
             for j in range(k, n+1):
                 Ab[i][j] = Ab[i][j] - mult*Ab[k][j]
+        result = Ab
     #retorna las x            
-    return(sortResult(backSubstitution(Ab), order))
+    return(sortResult(backSubstitution(Ab), order),result)
 
 def searchTheBiggestandSwap(Ab, n, k, order):
     row = k
@@ -118,8 +127,15 @@ def backSubstitution(Ab):
     return x
 
 def printMatriz(M):
+    result=''
     for i in range(len(M)):
         print(M[i])
+
+def printMatriz2(M,k,result):
+    for i in range(len(M)):
+        print(M[i])
+    result[k]=M
+    return result
 
 A = [[2, -1, 0, 3], 
     [1, 0.5, 3, 8], 

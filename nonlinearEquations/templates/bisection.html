@@ -17,17 +17,17 @@
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label>Funcion</label>
-                            <input type="text" class="form-control" placeholder=""  name="f_function" required />
+                            <input type="text" class="form-control" placeholder="" name="f_function" required />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>x0</label>
-                            <input type="number" class="form-control" placeholder=""  name="x0_value" required />
+                            <input type="number" class="form-control" placeholder="" name="x0_value" required />
                         </div>
                         <div class="form-group col-md-6">
                             <label>x1</label>
-                            <input type="number" class="form-control" placeholder=""  name="x1_value"  required/>
+                            <input type="number" class="form-control" placeholder="" name="x1_value" required/>
                         </div>
                     </div>
                     <div class="form-row">
@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label>Tolerancia</label>
-                            <input type="number" class="form-control" placeholder="" name="tol" step="any"  required />
+                            <input type="number" class="form-control" placeholder="" name="tol" step="any" required />
                         </div>
                     </div>
                     <div class="form-row">
@@ -47,35 +47,35 @@
                     </div>
                 </form>
                 <ul>
-                    {% if  data  %}
-                        <div class="row justify-content-center">
-                                <table class="table table-striped text-center table-BusquedasIncrementales">
-                                    <thead>
-                                        <tr>
-                                            <th>Iteracion</th>
-                                            <th>XI</th>
-                                            <th>XM</th>
-                                            <th>XS</th>
-                                            <th>FXM</th>
-                                            <th>Error</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                         <ul>
-                                            {% for key,value in data.items %}
-                                                <tr>
-                                                    <th>{{ key}}</th>
-                                                    <th>{{ value.0}}</th>
-                                                    <th>{{ value.1}}</th>
-                                                    <th>{{ value.2}}</th>
-                                                    <th>{{ value.3}}</th>
-                                                    <th>{{ value.4}}</th>
-                                                </tr>
-                                            {% endfor %}
-                                         </ul>
-                                    </tbody>
-                                </table>
-                        </div>
+                    {% if data %}
+                    <div class="row justify-content-center">
+                        <table class="table table-striped text-center table-BusquedasIncrementales">
+                            <thead>
+                                <tr>
+                                    <th>Iteracion</th>
+                                    <th>XI</th>
+                                    <th>XM</th>
+                                    <th>XS</th>
+                                    <th>FXM</th>
+                                    <th>Error</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ul>
+                                    {% for key,value in data.items %}
+                                    <tr>
+                                        <th>{{ key}}</th>
+                                        <th>{{ value.0}}</th>
+                                        <th>{{ value.1}}</th>
+                                        <th>{{ value.2}}</th>
+                                        <th>{{ value.3}}</th>
+                                        <th>{{ value.4}}</th>
+                                    </tr>
+                                    {% endfor %}
+                                </ul>
+                            </tbody>
+                        </table>
+                    </div>
                     {% endif %}
                 </ul>
             </div>
