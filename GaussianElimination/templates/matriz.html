@@ -101,19 +101,24 @@
             </thead>
             <tbody>
                 <ul>
-                    <!--{% for key in steps %}
+                    {% for key, value in steps.items %}
                     <tr>
                         <th>{{ key }}</th>
-                        <th>{{ steps }}</th>
+                        <th>
+                            {% for v in value %}
+                                <p>{{ v }}</p> 
+                            {% endfor %}
+                        </th>
                     </tr>
-                    {% endfor %}-->
+                    {% endfor %}
+                    <!--
                     <tr>
                         <th>Ultima Etapa</th>
                         <th>
                             {% for key in steps %}
                             <p>{{ key }} {% endfor %}</p>
                         </th>
-                    </tr>
+                    </tr>-->
                 </ul>
             </tbody>
         </table>

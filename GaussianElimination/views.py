@@ -28,4 +28,3 @@ def GaussianEliminationP(request):
         print('result:', result[1])
         return render(request, "matriz.html",{'x':result[0],'steps':result[1]})
     return render(request, "matriz.html",{'data':''})
-        
