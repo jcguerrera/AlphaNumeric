@@ -1,14 +1,13 @@
-FROM python:3.4
+FROM python:3.4-slim
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        sqlite3 \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+		gcc \
+		gettext \
+		mysql-client libmysqlclient-dev \
+		postgresql-client libpq-dev \
+		sqlite3 \
+	--no-install-recommends && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /usr/src/app
-COPY requirements.txt ./
-RUN pip install -r requirements.txt
-COPY . .
+ENV DJANGO_VERSION 1.10.4
 
-EXPOSE 8000
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+RUN pip install mysqlclient psycopg2 django=="$DJANGO_VERSION"
