@@ -1,9 +1,14 @@
-from django.shortcuts import render
+import io
 
-# Create your views here.
+from django.http import HttpResponse
+from django.shortcuts import render
+import sympy as sm
+from matplotlib.backends.backend_agg import FigureCanvasAgg
 from Metodos.Bisection import bisection
 from Metodos.falseRule import falseRule
 from Metodos.IncrementalSearch import incremental_search
+# Create your views here.
+
 
 
 def bisectionP(request):
@@ -31,10 +36,6 @@ def incremental_SearchP(request):
         nIter = request.POST.get('nIter')
 
         print(funcion, xi, delta, nIter)
-        la_que_sirve = 'ln((sin(x)^2)+1)-(1/2)'
-        funcion = funcion.replace(' ', '')
-        if (la_que_sirve == funcion):
-            print('Moreno GEI')
 
         data = incremental_search(str(funcion),float(xi),float(delta),float(nIter))
         print(data)
