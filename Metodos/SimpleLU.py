@@ -1,20 +1,22 @@
 import numpy as np
 import math as math
+import copy
 
 def simpleLU(A, b):
 
     n = len(A)
     u = zero_Matrix(n)
     l = lmatrix(n)
+    dicL = {}
+    dicU = {}
 
     for k in range(n):
         print('step ', k)
         printMatriz(A)
         print('L step', k)
         printMatriz(l)
-        print('u step', k)
-        printMatriz(u)
-
+        dicL[k] = copy.deepcopy(l)
+        dicU[k] = copy.deepcopy(u)
         if (A[k][k] == 0):
             A = searchAndSwapZero(A, n, k)
         for i in range(k + 1, n):
@@ -27,14 +29,18 @@ def simpleLU(A, b):
         for i in range(n):
             u[k][i] = A[k][i]
         printMatriz(u)
+        dicU[k] = copy.deepcopy(u)
 
-    print('u', u)
+    print('u', dicU)
     lb = concatenateMatrix(l, b)
     z = progSubtitution(lb)
     uz = concatenateMatrix(u, z)
     x = backSubstitution(uz)
-    print('z ', z)
     print('x ', x)
+
+    return (x,dicL,dicU)
+
+
 
 
 def searchAndSwapZero(Ab, n, i):
@@ -112,7 +118,7 @@ def printMatriz(M):
 
 
 '--------------------------------------------------------------'
-A = [[4.0, -1.0, 0.0, 3.0],
+'''A = [[4.0, -1.0, 0.0, 3.0],
      [1.0, 15.5, 3.0, 8.0],
      [0.0, -1.3, -4.0, 1.1],
      [14.0, 5.0, -2.0, 30.0],
@@ -120,4 +126,4 @@ A = [[4.0, -1.0, 0.0, 3.0],
 
 b2 = [1, 1, 1, 1]
 
-simpleLU(A, b2)
+simpleLU(A, b2)'''
