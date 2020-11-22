@@ -19,6 +19,9 @@ from Interpolation import views as Interpolation_views
 from nonlinearEquations import views as NoLinearEquations
 from AlphaNumeric import views as AlphaNumeric_views
 from GaussianElimination import views as GaussianElimination_views
+from LUFactorization import views as LU_Factorization
+from Iterative import views as Sor
+from Interpolation import views as Diferencies
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', AlphaNumeric_views.index, name='alpha_views'),
@@ -28,5 +31,8 @@ urlpatterns = [
     path('busquedas/',NoLinearEquations.incremental_SearchP, name ='no_lineal_Search'),
     path('reglafalsa/',NoLinearEquations.falseRuleP, name ='no_lineal_reglafalsa'),
     path('gaussian_elimination/',GaussianElimination_views.GaussianEliminationP, name ='gaussianElimination'),
+    path('LU_Factorization/',LU_Factorization._simpleLU, name ='LU_Factorization'),
+    path('sor/',Sor._sor, name ='sor'),
+    path('divide_diferencies/',Diferencies._NewtonP, name ='divide_diferencies'),
     path('index/', AlphaNumeric_views.index, name='alpha_views'),
 ]

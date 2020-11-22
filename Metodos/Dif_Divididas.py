@@ -24,8 +24,10 @@ def divide_dif(x,y):
     print('Coef: ',res)
     print('Newton Polinom : ', r)
 
+    return (r,D)
 
-x = [-1, 0, 3, 4]
+
+'''x = [-1, 0, 3, 4]
 y = [15.5, 3, 8, 1]
 
-divide_dif(x,y)
+divide_dif(x,y)'''

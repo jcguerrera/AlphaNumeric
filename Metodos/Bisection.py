@@ -12,6 +12,7 @@ def bisection(funcion, xi, xs, nIter, iter):
         x = sm.symbols('x')
         fxi = sm.sympify(funcion).subs(x, xi)
         fxs = sm.sympify(funcion).subs(x, xs)
+        sm.plot(funcion)
         if (fxi == 0):
             print(fxi)
         elif (fxs == 0):
@@ -39,4 +40,8 @@ def bisection(funcion, xi, xs, nIter, iter):
         print('el intervalo no sirve')
         sys.exit(1)
 
+
 #print(bisection('ln((sin(x)^2)+1)-(1/2)',0,1,100,0.0000001))
+
+#bisection('ln((sin(x)^2)+1)-(1/2)',0,1,100,0.0000001)
+

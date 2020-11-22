@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'LUFactorization',
     'nonlinearEquations',
     'bootstrap4',
+    'multiforloop',
 ]
 
 MIDDLEWARE = [
