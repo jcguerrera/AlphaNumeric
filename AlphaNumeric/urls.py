@@ -23,7 +23,13 @@ from LUFactorization import views as LU_Factorization
 from Iterative import views as Sor
 from Iterative import views as Iteratives_views
 from Interpolation import views as Diferencies
+
+
+admin.autodiscover()
+
+
 from Interpolation import views as Interpolation_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', AlphaNumeric_views.index, name='alpha_views'),
