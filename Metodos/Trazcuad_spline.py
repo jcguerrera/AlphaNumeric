@@ -1,4 +1,4 @@
-from GaussianElimination_splines import simpleGaussianElimination,partialGaussianElimination,totalGaussianElimination, backSubstitution, sortResult
+from Metodos.GaussianElimination_splines import simpleGaussianElimination,partialGaussianElimination,totalGaussianElimination, backSubstitution, sortResult
 
 def matrix_cuad(x, b):
     a = [[0 for i in range((len(x)-1)*3)] for j in range((len(x)-1)*3)]
@@ -51,6 +51,7 @@ def traces(x):
     j = 0
     for i in range(len(x)):
         if j == 0:
+          #  print(x[i])
             if x[i] >= 0.0:
                 result += "+"+str(x[i])+"x**2"
             else:
@@ -67,22 +68,31 @@ def traces(x):
                 result += str(x[i])+" "
             j = -1
         j += 1
-    print("\n Traces: \n")
+    #("\n Traces: \n")
+    traces =""
     for i in result.split(" "):
-        print(i)
+        traces+= str(i)+ "\n"
+    return(traces)
     
 
-if __name__ == "__main__":
-    x = [-1,0,3,4]
-    y = [15.5,3,8,1]
+def trazcuad_spline(x,y,d):
+    ''' x = [-1,0,3,4]
+    y = [15.5,3,8,1]'''
+
     b = y
     A, b = matrix_cuad(x,b)
-    print("A:  \n"+str(A))
-    print("b: \n"+str(b))
-    t1=totalGaussianElimination(A, b)
-    #t2=partialGaussianElimination(A, b)
-    #t3=simpleGaussianElimination(A, b)
 
-    traces(t1)
-    #traces(t2)
-    #traces(t3)
+
+    if(d=="T"):
+        t1=totalGaussianElimination(A, b)
+        return traces(t1[0]),A,b,t1[1],t1[0]
+
+    elif(d=="P"):
+        t2=partialGaussianElimination(A, b)
+        return traces(t2[0]),A,b,t2[1],t2[0]
+    elif(d=="S"):
+        t3=simpleGaussianElimination(A, b)
+        return traces(t3[0]),A,b,t3[1],t3[0]
+
+
+#print(trazcuad_spline("T")[4])

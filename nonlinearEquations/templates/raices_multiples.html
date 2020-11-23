@@ -1,0 +1,73 @@
+{% extends 'layouts/master.html' %} {% block content %}
+<div class="contenedor">
+    <br>
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+            <div class="card">
+                <h1>RAICES MULTIPLES</h1>
+                <form method="POST" action="/raices_multiples/">
+                    {% csrf_token %}
+                    <label for="fname">X0:</label><br>
+                    <input type="text" id="x0" name="x0"><br>
+                    <label for="fname">Iteraciones:</label><br>
+                    <input type="text" id="i" name="i"><br>
+                    <label for="lname">Tolerancia:</label><br>
+                    <input type="text" id="t" name="t"><br><br>
+                    <label for="lname">Funcion 1:</label><br>
+                    <input type="text" id="f1" name="f1"><br><br>
+                    <label for="lname">Funcion 2:</label><br>
+                    <input type="text" id="f2" name="f2"><br><br>
+                    <label for="lname">Funcion 3:</label><br>
+                    <input type="text" id="f3" name="f3"><br><br>
+                    <input type="submit" value="Submit">
+                </form>
+               <div class="form-group col-md-12" id="plot"></div>
+                <ul>
+                    {% if  data  %}
+                        <div class="form-group col-md-6" >
+                            <a button type="submit" href="/grafica" class="btn btn-primary mb-2">Generar Grafico</a>
+                        </div>
+
+              
+                <h5 >Respuesta: </h5>
+                <h5>{{add}}</h5><br>
+                <div class="row justify-content-center">
+
+
+                        <div class="row justify-content-center">
+                                <table class="table table-striped text-center table-BusquedasIncrementales">
+                                    <thead>
+                                        <tr>
+                                            <th>Iteracion</th>
+                                            <th>X0</th>
+                                            <th>f(x0)</th>
+                                            <th>Error</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                         <ul>
+                                            {% for key,value in data.items %}
+                                                <tr>
+                                                    <th>{{ key}}</th>
+                                                    <th>{{ value.0}}</th>
+                                                    <th>{{ value.1}}</th>
+                                                    <th>{{ value.2}}</th>
+                                                </tr>
+                                            {% endfor %}
+                                         </ul>
+                                    </tbody>
+                                </table>
+                        </div>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

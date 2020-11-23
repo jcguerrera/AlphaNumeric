@@ -1,4 +1,4 @@
-from GaussianElimination_splines import simpleGaussianElimination,partialGaussianElimination,totalGaussianElimination
+from Metodos.GaussianElimination_splines import simpleGaussianElimination,partialGaussianElimination,totalGaussianElimination
 
 
 def matrix_lin(x, b):
@@ -49,17 +49,23 @@ def traces(x):
         
 
 
-if __name__ == "__main__":
-    x = [-1,0,3,4]
-    y = [15.5,3,8,1]
+def trazlin_spline(x,y,d):
+    ''' x = [-1,0,3,4]
+    y = [15.5,3,8,1]'''
+
     b = y
     A, b = matrix_lin(x,b)
-    print("A:  \n"+str(A))
-    print("b: \n"+str(b))
-    t1=totalGaussianElimination(A, b)
-    #t2=partialGaussianElimination(A, b)
-    #t3=simpleGaussianElimination(A, b)
 
-    traces(t1)
-    #traces(t2)
-    #traces(t3)
+
+    if(d=="T"):
+        t1=totalGaussianElimination(A, b)
+        return traces(t1[0]),A,b,t1[1],t1[0]
+
+    elif(d=="P"):
+        t2=partialGaussianElimination(A, b)
+        return traces(t2[0]),A,b,t2[1],t2[0]
+    elif(d=="S"):
+        t3=simpleGaussianElimination(A, b)
+        return traces(t3[0]),A,b,t3[1],t3[0]
+    
+#print(trazlineal_spline("T")[4])
