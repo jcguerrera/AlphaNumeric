@@ -23,7 +23,7 @@ def bisectionP(request):
         data = bisection(str(funcion), float(xi), float(xs), float(nIter), float(iter))
         print(data)
 
-        return render(request, "bisection.html", {'data': data})
+        return render(request, "bisection.html", {'data': data,'message':data['message']})
 
     return render(request, "bisection.html", {'data': ''})
 
@@ -40,7 +40,7 @@ def incremental_SearchP(request):
         data = incremental_search(str(funcion),float(xi),float(delta),float(nIter))
         print(data)
 
-        return render(request, "IncrementalSearch.html", {'data': data})
+        return render(request, "IncrementalSearch.html", {'data': data,'message':data['message']})
 
     return render(request, "IncrementalSearch.html", {'data': ''})
 

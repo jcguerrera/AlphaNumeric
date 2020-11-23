@@ -75,12 +75,21 @@
 
                 <div id="vector_x0" class="text-align metodo">Vector Y</div>
                 <div id="vectorx" class="text-align"> </div>
-                $$ \int f(x) dx $$
+
             </form>
                 <h5 >Polinomio: </h5><br>
-                <h5>{{Polinomio}}</h5><br>
+                <h5 class="text-center">\({{Polinomio}}\)</h5><br>
                 <h5 >D:</h5><br>
-                <h5>{{D}}</h5><br>
+                \begin{pmatrix}
+
+                {% for v in D %}
+                    {% for p in v %}
+                    {{p}}&
+                    {% endfor %}
+                    \\
+                {% endfor %}
+                \end{pmatrix}
+
         </div>
 
     </div>
