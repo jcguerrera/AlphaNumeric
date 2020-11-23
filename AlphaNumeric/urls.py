@@ -23,9 +23,6 @@ from LUFactorization import views as LU_Factorization
 from Iterative import views as Sor
 from Interpolation import views as Diferencies
 
-from django.conf import settings
-from django.conf.urls.static import static
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', AlphaNumeric_views.index, name='alpha_views'),
@@ -39,4 +36,4 @@ urlpatterns = [
     path('sor/',Sor._sor, name ='sor'),
     path('divide_diferencies/',Diferencies._NewtonP, name ='divide_diferencies'),
     path('index/', AlphaNumeric_views.index, name='alpha_views'),
-] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+]
