@@ -4,6 +4,9 @@ from Interpolation import templates
 from Metodos.lagrange import lagrange
 from Metodos.vandermonde import vandermonde
 from Metodos.Dif_Divididas import divide_dif
+from Metodos.Trazcuad_spline import trazcuad_spline
+from Metodos.Trazcub_spline import trazcub_spline
+from Metodos.Trazlin_spline import trazlin_spline
 
 
 # Create your views here.
@@ -69,3 +72,28 @@ def _NewtonP(request):
         return render(request, "dif_Divididas.html", {'Polinomio': result[0], 'D': result[1]})
 
     return render(request, "dif_Divididas.html", {'data': ''})
+
+def splinesP(request):
+    if 'n' in request.POST:
+        n = int(request.POST.get('n'))
+        method_splines = request.POST.get('method_type_splines')
+        method_gauss = request.POST.get('method_type_gauss')
+        x = []
+        y = []
+        for i in range(n):
+            fila = []
+            x.append(float(request.POST.get('vector'+str(i))))
+            y.append(float(request.POST.get('vectorx'+str(i))))
+
+        result = ()
+        print(method_splines)
+        print(method_gauss)
+        if method_splines == 'cuad':
+            result = trazcuad_spline(x,y,method_gauss)
+        elif method_splines == 'lin':
+            result = trazlin_spline(x,y,method_gauss)
+        elif method_splines == 'cub':
+            result = trazcub_spline(x,y,method_gauss)
+
+        return render(request, "splines.html",{'trazas':result[0],'steps':result[3],'A':result[1],'b':result[2],'x':result[4]})
+    return render(request, "splines.html",{'data':''})   

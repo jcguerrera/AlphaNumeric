@@ -1,20 +1,24 @@
 import numpy as np
 import math 
+import copy
 
 def simpleGaussianElimination(A, b):
-    Ab = concatenar(A, b)
+    Ab = concatenarMatriz(A, b)
     n = len(Ab)
+    result = {}
     for k in range(n):
-        print('step ',k)
-        print(Ab)
+       # print('step ',k)
+        #print(Ab)
+        result[k]=copy.deepcopy(Ab)
         if(Ab[k][k]==0):
             Ab = searchAndSwapZero(Ab, n, k)
         for i in range(k+1, n):
             mult = Ab[i][k]/Ab[k][k]
             for j in range(k, n+1):
                 Ab[i][j] = Ab[i][j] - mult*Ab[k][j]
-    print('x ',backSubstitution(Ab))
-    return backSubstitution(Ab)
+  #  print('x ',backSubstitution(Ab))
+    return(backSubstitution(Ab),result)
+
 def searchAndSwapZero(Ab, n, i):
     for j in range(i+1,n):
         if(Ab[j][i]!=0):
@@ -26,17 +30,20 @@ def searchAndSwapZero(Ab, n, i):
 
 def partialGaussianElimination(A, b):
     Ab = concatenarMatriz(A, b)
+    order = []
+    result = {}
     n = len(Ab)
     for k in range(n):
-        print('step ',k)
-        printMatriz(Ab)
+      #  print('step ',k)
+       # printMatriz(Ab)
+        result[k]=copy.deepcopy(Ab)
         Ab = searchBiggerandSwap(Ab, n, k)
         for i in range(k+1, n):
             mult = Ab[i][k]/Ab[k][k]
             for j in range(k, n+1):
                 Ab[i][j] = Ab[i][j] - mult*Ab[k][j]
-    print('X ',backSubstitution(Ab))
-    return backSubstitution(Ab)
+  #  print('X ',backSubstitution(Ab))
+    return(backSubstitution(Ab),result)
 
 def searchBiggerandSwap(Ab, n, i):
     row = i
@@ -50,18 +57,20 @@ def searchBiggerandSwap(Ab, n, i):
 
 def totalGaussianElimination(A, b):
     order = []
+    result = {}
     Ab = concatenarMatriz(A, b)
     n = len(Ab)
     for k in range(n):
-        print('step ',k)
-        printMatriz(Ab)
+      #  print('step ',k)
+       # printMatriz(Ab)
+        result[k]=copy.deepcopy(Ab)
         Ab, order = searchTheBiggestandSwap(Ab, n, k, order)
         for i in range(k+1, n):
             mult = Ab[i][k]/Ab[k][k]
             for j in range(k, n+1):
                 Ab[i][j] = Ab[i][j] - mult*Ab[k][j]
-    print('x ',sortResult(backSubstitution(Ab), order))
-    return sortResult(backSubstitution(Ab), order)
+    #retorna las x            
+    return(sortResult(backSubstitution(Ab), order),result)
 
 def searchTheBiggestandSwap(Ab, n, k, order):
     row = k
@@ -119,25 +128,27 @@ def backSubstitution(Ab):
     return x
 
 def printMatriz(M):
-    for i in range(len(M)):
-        print(M[i])
+    result=''
 
 
-A = [[0, -2, -2, -1], 
-    [0, 8, -2, -2], 
-    [-1, -1, 4, 0], 
-    [-1, -2, 2, 7]]
+def printMatriz2(M,k,result):
+
+    result[k]=M
+    return result
+
+A = [[2, -1, 0, 3], 
+    [1, 0.5, 3, 8], 
+    [0, 13, -2, 11], 
+    [14, 5, -2, 3]]
 
 b = [[1], [1], [1], [1]]
 b2 = [1,1,1,1]
 
-if __name__ == "__main__":
-    #print('simple Gaussian Elimination')
-    #Ab = simpleGaussianElimination(A,b)
-    
-    #print('----------------------')
-    #print('Partial Gaussian Elimination')
-    #Ab = partialGaussianElimination(A,b2)
-    #print('----------------------')
-   # print('Total Gaussian Elimination')
-    totalGaussianElimination(A,b2)
+#print('simple Gaussian Elimination')
+#Ab = simpleGaussianElimination(A,b)
+#print('----------------------')
+#print('Partial Gaussian Elimination')
+#Ab = partialGaussianElimination(A,b2)
+#print('----------------------')
+#print('Total Gaussian Elimination')
+#totalGaussianElimination(A,b2)
