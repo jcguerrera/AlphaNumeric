@@ -1,14 +1,10 @@
+import abc
 import sympy as sm
-import math
-import sys 
-import json
-import base64
-import pandas as pd
-
 
 
 def secant(x0, x1, nInterations, tol, function):
     results = {}
+    add = {}
 
     x = sm.symbols('x')
     fx0 = sm.sympify(function).subs(x, x0)
@@ -33,44 +29,24 @@ def secant(x0, x1, nInterations, tol, function):
             fx1 = sm.sympify(function).subs(x, x1)
             det = fx1 - fx0
             cont = cont + 1
-            results [cont] = [float (xi), float (fx1), float (error)]
+            results [cont] = ([round(float (xi),10), round(float (fx1),10), round(float (error),10)])
 
-        print_function (results)
         
            
 
         if (fx1 == 0):
            
-            print (str (x0) + "is a root")
+            add = (str(x0)+" is a root")
         
 
         elif (error <tol):
-            print (str (x1) + "was found as an approximation with a tolerance of =" + str (tol))
+            add= (str(x1)+" was found as an approximation with a tolerance of = "+str(tol))
         
         elif (det == 0):
-            print (str (x1) + "is a possible multiple root")
-        
+            add= (str(x1)+"is a possible multiple root")
+
         else:
-            print ("The method failed in" + str (nInterations) + "iterations")
+            add=("The method failed in "+str(nInterations)+ " iterations")
 
-def print_function (results):
-    index = []
-    x1 = []
-    fprom = []
-    error = []
-    for i in results:
-        index.append (i)
-        x1.append (results [i] [0])
-        fprom.append (results [i] [1])
-        error.append (results [i] [2])
-
-    data = {
- 
-            'xi': x1,
-            'F (xi)': fprom,
-            'Error': error
-            }
-    df = pd.DataFrame (data, index = index)
-    print (df)
-
-secant(0.5, 1.0, 100, 0.0000001, 'ln ((sin (x) ^ 2) +1) - (1/2)')
+    return results,add
+#print(secant(0.5, 1.0, 100, 0.0000001, 'ln ((sin (x) ^ 2) +1) - (1/2)')[0])

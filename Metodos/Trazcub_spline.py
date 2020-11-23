@@ -1,4 +1,4 @@
-from GaussianElimination_splines import simpleGaussianElimination,partialGaussianElimination,totalGaussianElimination, backSubstitution, sortResult
+from Metodos.GaussianElimination_splines import simpleGaussianElimination,partialGaussianElimination,totalGaussianElimination, backSubstitution, sortResult
 
 def matrix_cub(x, b):
     a = [[0 for i in range((len(x)-1)*4)] for j in range((len(x)-1)*4)]
@@ -106,17 +106,22 @@ def traces(x):
     for i in result.split(" "):
         print(i)
 
-if __name__ == "__main__":
-    x = [-1,0,3,4]
-    y = [15.5,3,8,1]
+def trazcub_spline(x,y,d):
+    ''' x = [-1,0,3,4]
+    y = [15.5,3,8,1]'''
+
     b = y
     A, b = matrix_cub(x,b)
-    print("A:  \n"+str(A))
-    print("b: \n"+str(b))
-    t1=totalGaussianElimination(A, b)
-    #t2=partialGaussianElimination(A, b)
-    #t3=simpleGaussianElimination(A, b)
 
-    traces(t1)
-    #traces(t2)
-    #traces(t3)
+
+    if(d=="T"):
+        t1=totalGaussianElimination(A, b)
+        return traces(t1[0]),A,b,t1[1],t1[0]
+
+    elif(d=="P"):
+        t2=partialGaussianElimination(A, b)
+        return traces(t2[0]),A,b,t2[1],t2[0]
+    elif(d=="S"):
+        t3=simpleGaussianElimination(A, b)
+        return traces(t3[0]),A,b,t3[1],t3[0]
+    
