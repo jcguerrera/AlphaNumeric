@@ -5,40 +5,47 @@ import copy
 def simpleLU(A, b):
 
     n = len(A)
-    u = zero_Matrix(n)
-    l = lmatrix(n)
-    dicL = {}
-    dicU = {}
+    det = np.linalg.det(A)
+    message = ''
+    if(det != 0):
+        u = zero_Matrix(n)
+        l = lmatrix(n)
+        dicL = {}
+        dicU = {}
 
-    for k in range(n):
-        print('step ', k)
-        printMatriz(A)
-        print('L step', k)
-        printMatriz(l)
-        dicL[k] = copy.deepcopy(l)
-        dicU[k] = copy.deepcopy(u)
-        if (A[k][k] == 0):
-            A = searchAndSwapZero(A, n, k)
-        for i in range(k + 1, n):
-            mult = A[i][k] / A[k][k]
-            l[i][k] = mult
-            for j in range(k, n):
-                A[i][j] = A[i][j] - mult * A[k][j]
+        for k in range(n):
+            print('step ', k)
+            printMatriz(A)
+            print('L step', k)
+            printMatriz(l)
+            dicL[k] = copy.deepcopy(l)
+            dicU[k] = copy.deepcopy(u)
+            if (A[k][k] == 0):
+                A = searchAndSwapZero(A, n, k)
+            for i in range(k + 1, n):
+                mult = A[i][k] / A[k][k]
 
-        print('u step', k)
-        for i in range(n):
-            u[k][i] = A[k][i]
-        printMatriz(u)
-        dicU[k] = copy.deepcopy(u)
+                l[i][k] = mult
+                for j in range(k, n):
+                    A[i][j] = A[i][j] - mult * A[k][j]
 
-    print('u', dicU)
-    lb = concatenateMatrix(l, b)
-    z = progSubtitution(lb)
-    uz = concatenateMatrix(u, z)
-    x = backSubstitution(uz)
-    print('x ', x)
+            print('u step', k)
+            for i in range(n):
+                u[k][i] = A[k][i]
+            printMatriz(u)
+            dicU[k] = copy.deepcopy(u)
 
-    return (x,dicL,dicU)
+        print('u', dicU)
+        lb = concatenateMatrix(l, b)
+        z = progSubtitution(lb)
+        uz = concatenateMatrix(u, z)
+        x = backSubstitution(uz)
+        print('x ', x)
+
+        return (x,dicL,dicU,message)
+    else:
+        message = 'Error'
+        return ('', '', '', message)
 
 
 
