@@ -101,24 +101,33 @@
             </thead>
             <tbody>
                 <ul>
+                    <!--
                     {% for key, value in steps.items %}
                     <tr>
                         <th>{{ key }}</th>
                         <th>
                             {% for v in value %}
-                                <p>{{ v }}</p> 
+                                <p>{{ v }}</p> \\
                             {% endfor %}
                         </th>
                     </tr>
-                    {% endfor %}
-                    <!--
+                    {% endfor %}-->
+                    
+                    {% for key, value in steps.items %}
                     <tr>
-                        <th>Ultima Etapa</th>
+                        <th>{{ key }}</th>
                         <th>
-                            {% for key in steps %}
-                            <p>{{ key }} {% endfor %}</p>
+                            \begin{bmatrix}
+                            {% for v in value %}
+                                {% for p in v %}
+                                    {{p}}&
+                                {% endfor %}
+                                \\
+                            {% endfor %}
+                            \end{bmatrix}
                         </th>
-                    </tr>-->
+                    </tr>
+                    {% endfor %}
                 </ul>
             </tbody>
         </table>
