@@ -50,4 +50,5 @@ urlpatterns = [
     path('index/', AlphaNumeric_views.index, name='alpha_views'),
     path('newton/',NoLinearEquations.newton, name ='newton'),
     path('fixedPoint/',NoLinearEquations.fixedPoint, name ='fixedPoint'),
+    path('doolittle/',LU_Factorization.doolittle, name ='doolittle'),
 ]
