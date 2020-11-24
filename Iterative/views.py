@@ -23,7 +23,8 @@ def _sor(request):
         print(x0)
 
         result = sor(matrix,b,x0,float(w),float(tol),float(nIter))
-        return render(request, "sor.html", {'Radio': result[0], 'T': result[1], 'C': result[2],'data': result[3]})
+        print(result[4])
+        return render(request, "sor.html", {'Radio': result[0], 'T': result[1], 'C': result[2],'data': result[3],'message': result[4]})
 
 
     return render(request, "sor.html",{'data':''})

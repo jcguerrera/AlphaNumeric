@@ -11,18 +11,18 @@
 
         <div class="col-md-8">
             <div class="card">
-                <h1>Biseccion</h1>
+                <h1>Bisection</h1>
                 <form id="form" method="POST" action="/biseccion/" class="form">
                     {% csrf_token %}
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="eq">Funcion</label>
+                            <label for="eq">Function</label>
                             <input id="eq" type="text" value="4 * sin(x) + 5 * cos(x/2)" class="form-control" placeholder="" name="f_function" required />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>x0</label>
+                            <label>X0</label>
                             <input type="number" class="form-control" placeholder="" name="x0_value" required />
                         </div>
                         <div class="form-group col-md-6">
@@ -32,11 +32,11 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Numero Iteraciones</label>
+                            <label>Iteration Quantity</label>
                             <input type="number" class="form-control" placeholder="" name="nIter" step="any" required />
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Tolerancia</label>
+                            <label>Tolerance</label>
                             <input type="number" class="form-control" placeholder="" name="tol" step="any" required />
                         </div>
                     </div>
@@ -47,14 +47,25 @@
                         </div>
                     </div>
                 </form>
-                <div id="plot"></div>
+                <div id="plot" class="form-inline"></div>
                 <ul>
+                    {% if Error%}
+                       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>This method does not work</strong> You should check in on some fields .
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                  {% endif %}
+                    <h5>Response:</h5>
+                        <label for="">{{message}}</label>
                     {% if data %}
+
                     <div class="row justify-content-center">
                         <table class="table table-striped text-center table-BusquedasIncrementales">
                             <thead>
                                 <tr>
-                                    <th>Iteracion</th>
+                                    <th>Iteration</th>
                                     <th>XI</th>
                                     <th>XM</th>
                                     <th>XS</th>

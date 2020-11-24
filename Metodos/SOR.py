@@ -5,6 +5,7 @@ import copy
 
 def sor(A, b, x0, w, tol, Nmax):
     results = {}
+    message = ''
     det = np.linalg.det(A)
     if(det != 0):
         d = np.diag(A)
@@ -31,10 +32,11 @@ def sor(A, b, x0, w, tol, Nmax):
         print('T', T)
         print('C', C)
 
-        return (resp,T,C,results)
+        return (resp,T,C,results,None)
     else:
-        results['message'] = 'Error'
-        return ('','','',results)
+        message= 'Error'
+        print(message)
+        return (None,None,None,None,message)
 
 
 def print_iter(results):

@@ -16,9 +16,12 @@ def partialLU(A, b):
             print('step ', k)
             printMatriz(A)
             print('L step', k)
-            printMatriz(l)
-            dicL[k] = copy.deepcopy(l)
-            dicU[k] = copy.deepcopy(u)
+
+            la = np.around(l,decimals=5)
+            printMatriz(la)
+            dicL[k] = copy.deepcopy(la)
+            ua = np.around(u, decimals=5)
+            dicU[k] = copy.deepcopy(ua)
             A, p = searchBiggerandSwap(A, n, k, p)
             for i in range(k + 1, n):
                 mult = A[i][k] / A[k][k]
@@ -29,22 +32,25 @@ def partialLU(A, b):
             print('u step', k)
             for i in range(n):
                 u[k][i] = A[k][i]
-            printMatriz(u)
-            dicU[k] = copy.deepcopy(u)
+            ua = np.around(u,decimals=5)
+            printMatriz(ua)
+            dicU[k] = copy.deepcopy(ua)
             print('P step', k)
-            printMatriz(p)
-            dicP[k] = copy.deepcopy(p)
+            pa = np.around(p,decimals=5)
+            printMatriz(pa)
+            dicP[k] = copy.deepcopy(pa)
 
         Pb = multAb(p, b)
         lpb = concatenateMatrix(l, Pb)
         z = progSubtitution(lpb)
         uz = concatenateMatrix(u, z)
         x = backSubstitution(uz)
-        print('det', det)
-        return (x,dicL,dicU,dicP,message)
+        x = np.around(x,decimals=5)
+        print('det', x)
+        return (x,dicL,dicU,dicP,None)
     else:
         message = 'Error'
-        return ('','','','',message)
+        return (None,None,None,None,message)
 
 def searchBiggerandSwap(Ab, n, i, p):
     row = i
@@ -127,7 +133,7 @@ def printMatriz(M):
 
 
 '--------------------------------------------------------------'
-A = [[4.0, -1.0, 0.0, 3.0],
+'''A = [[4.0, -1.0, 0.0, 3.0],
      [1.0, 15.5, 3.0, 8.0],
      [0.0, -1.3, -4.0, 1.1],
      [14.0, 5.0, -2.0, 30.0],
@@ -135,4 +141,4 @@ A = [[4.0, -1.0, 0.0, 3.0],
 
 b2 = [1, 1, 1, 1]
 
-partialLU(A, b2)
+partialLU(A, b2)'''
