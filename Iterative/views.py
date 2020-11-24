@@ -19,14 +19,13 @@ def _sor(request):
             for j in range(n):
                 fila.append(float(request.POST.get('matrix'+str(i)+str(j))))
             matrix.append(fila)
-
         print(x0)
-
-        result = sor(matrix,b,x0,float(w),float(tol),float(nIter))
-        print(result[4])
-        return render(request, "sor.html", {'Radio': result[0], 'T': result[1], 'C': result[2],'data': result[3],'message': result[4]})
-
-
+        try:
+            result = sor(matrix,b,x0,float(w),float(tol),float(nIter))
+            print(result[4])
+            return render(request, "sor.html", {'Radio': result[0], 'T': result[1], 'C': result[2],'data': result[3],'message': result[4]})
+        except:
+            return render(request, "sor.html", {'data': ''})
     return render(request, "sor.html",{'data':''})
 
 def JacobiP(request):

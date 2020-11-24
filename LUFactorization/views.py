@@ -18,12 +18,14 @@ def _simpleLU(request):
             matrix.append(fila)
         print(matrix)
         print(b)
-        result = ()
-        if method == 'S':
-            result = simpleLU(matrix,b)
-            return render(request, "simpleLU.html", {'x': result[0], 'L': result[1], 'U': result[2],'message':result[3]})
-        elif method == 'P':
-            result = partialLU(matrix,b)
-            return render(request, "simpleLU.html", {'x': result[0], 'L': result[1], 'U': result[2],'P': result[3],'message':result[4]})
+        try:
+            if method == 'S':
+                result = simpleLU(matrix,b)
+                return render(request, "simpleLU.html", {'x': result[0], 'L': result[1], 'U': result[2],'message':result[3]})
+            elif method == 'P':
+                result = partialLU(matrix,b)
+                return render(request, "simpleLU.html", {'x': result[0], 'L': result[1], 'U': result[2],'P': result[3],'message':result[4]})
+        except:
+            return render(request, "simpleLU.html", {'data': ''})
 
     return render(request, "simpleLU.html",{'data':''})
