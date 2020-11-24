@@ -24,11 +24,13 @@ def bisectionP(request):
         iter = request.POST.get('tol')
 
         print(funcion, xi, xs, nIter, iter)
-        data,noti,message = bisection(str(funcion), float(xi), float(xs), float(nIter), float(iter))
-        print(data)
+        try:
+            data,noti,message = bisection(str(funcion), float(xi), float(xs), float(nIter), float(iter))
+            print(data)
 
-        return render(request, "bisection.html", {'data': data,'message':noti,'Error':message})
-
+            return render(request, "bisection.html", {'data': data,'message':noti,'Error':message})
+        except:
+            return render(request, "bisection.html", {'data': ''})
     return render(request, "bisection.html", {'data': ''})
 
 
@@ -40,12 +42,13 @@ def incremental_SearchP(request):
         nIter = request.POST.get('nIter')
 
         print(funcion, xi, delta, nIter)
+        try:
+            data,noti,message = incremental_search(str(funcion),float(xi),float(delta),float(nIter))
+            print(data)
 
-        data,noti,message = incremental_search(str(funcion),float(xi),float(delta),float(nIter))
-        print(data)
-
-        return render(request, "IncrementalSearch.html", {'data': data,'message':noti,'Error':message})
-
+            return render(request, "IncrementalSearch.html", {'data': data,'message':noti,'Error':message})
+        except:
+            return render(request, "IncrementalSearch.html", {'data':''})
     return render(request, "IncrementalSearch.html", {'data': ''})
 
 def falseRuleP(request):
