@@ -33,6 +33,7 @@ from Interpolation import views as Interpolation_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', AlphaNumeric_views.index, name='alpha_views'),
+    path('methods/', AlphaNumeric_views.methods, name='alpha_methods'),
     path('lagrangeP/', Interpolation_views.lagrangeP, name='inter_lagrangeP'),
     path('vandermonde/', Interpolation_views.vandermondeP, name='inter_vandermonde'),
     path('biseccion/', NoLinearEquations.bisectionP, name='no_lineal_biseccion'),
@@ -47,4 +48,6 @@ urlpatterns = [
     path('raices_multiples/', NoLinearEquations.raices_multiplesP, name='raices_multiples'),
     path('divide_diferencies/',Diferencies._NewtonP, name ='divide_diferencies'),
     path('index/', AlphaNumeric_views.index, name='alpha_views'),
+    path('newton/',NoLinearEquations.newton, name ='newton'),
+    path('fixedPoint/',NoLinearEquations.fixedPoint, name ='fixedPoint'),
 ]

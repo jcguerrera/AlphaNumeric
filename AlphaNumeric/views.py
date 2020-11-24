@@ -4,5 +4,7 @@ from AlphaNumeric import templates
 # Create your views here.
 
 def index(request):
-    context={'camilo':2}
-    return render(request, "index/index.html",{'moreno':context})
+    return render(request, "index/index.html",{'moreno':''})
+
+def methods(request):
+    return render(request, "methods.html",{'moreno':''})

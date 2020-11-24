@@ -1,37 +1,41 @@
+import sympy as sm
 import numpy as np
 import matplotlib.pyplot as plt
 
+def newtonn(function, x0, iter, tol):
+    results = {}
 
-def f(x):
-    return x**3 - np.cos(x)
+    x = sm.symbols('x')
+    function = sm.sympify(function)
+    dFunction = sm.diff(function, x)
 
+    fx = function.subs(x, x0)
+    dFx = dFunction.subs(x, x0)
 
-def dF(x):
-    return 3 * x**2 + np.sin(x)
-
-
-def newton(x0, iter, tol):
-    fx = f(x0)
-    dFx = dF(x0)
     cont = 1
     error = tol + 1
     
     while( (fx != 0) and error > tol and (dFx != 0) and cont < iter):
         x1 = x0 - fx/dFx
-        fx = f(x1)
-        dFx = dF(x1)
+        fx = function.subs(x, x1)
+        dFx = dFunction.subs(x, x1)
         error = abs(x1-x0)
+
+        results[cont]=[float(x0),float(x1),float(fx),float(dFx),float(error)]
+
         x0 = x1
         cont += 1
 
     if fx == 0:
-        print("X0: " ,x0, " is root")
+        results['message'] = ("X0: " + str(x0) + " is root")
     elif error < tol:
-        print("X0: ", x0, " approximate root with tolerance: ", tol)
+        results['message'] = ("X0: " + str(x0) + " approximate root with tolerance: " + str(tol))
     elif dFx == 0:
-        print("X0: ", x0, " is probably a multiple root")
+        results['message'] = ("X0: " +  str(x0) + " is probably a multiple root")
     else:
-        print("Fail in iteration: ", iter)
+        results['message'] = ("Fail in iteration: " + str(iter))
+    
+    return results
 
 
 def draw():
@@ -41,5 +45,5 @@ def draw():
     plt.show()
 
 
-newton(1, 10, 0.000000005)
-draw()
+#print(newtonn('x^3 - cos(x)', 1.0, 10, 0.000000005))
+#draw()

@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>False Rule</title>
+    <title>Newton</title>
 </head>
 
 <div class="contenedor">
@@ -11,29 +11,25 @@
 
         <div class="col-md-8">
             <div class="card">
-                <h1>False Rule</h1>
-                <form method="POST" action="/reglafalsa/" class="form">
+                <h1>Newton</h1>
+                <form method="POST" action="/newton/" class="form">
                     {% csrf_token %}
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="eq">Function</label>
-                            <input id="eq" type="text" value="4 * sin(x) + 5 * cos(x/2)" class="form-control" placeholder="" name="f_function" required />
+                            <input id="eq" type="text" value="x^3 - cos(x)" class="form-control" placeholder="" name="f_function" required />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>a</label>
-                            <input type="number" step="0.01" class="form-control" placeholder="" name="a" required />
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>b</label>
-                            <input type="number" step="0.01" class="form-control" placeholder="" name="b" required/>
+                            <label>x0</label>
+                            <input type="number" step="0.01" class="form-control" placeholder="" name="x0" required />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label>Number of Iterations</label>
-                            <input type="number" class="form-control" placeholder="" name="nIter" step="any" required />
+                            <input type="number" class="form-control" placeholder="" name="iter" step="any" required />
                         </div>
                         <div class="form-group col-md-6">
                             <label>Tolerance</label>
@@ -48,14 +44,8 @@
                     </div>
                 </form>
                 <div id="plot"></div>
-                {% if message %}
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>This method does not work</strong> {{ message  }}
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                {% endif %}
+                <h5>Response:</h5>
+                <label for="">{{message}}</label>
                 <ul>
                     {% if data %}
                     <div class="row justify-content-center">
@@ -63,11 +53,11 @@
                             <thead>
                                 <tr>
                                     <th>Iteration</th>
-                                    <th>a</th>
-                                    <th>c</th>
-                                    <th>b</th>
-                                    <th>FC</th>
-                                    <th>Error</th>
+                                    <th>x0</th>
+                                    <th>x1</th>
+                                    <th>Fx</th>
+                                    <th>df/dx</th>
+                                    <th>error</th>
                                 </tr>
                             </thead>
                             <tbody>

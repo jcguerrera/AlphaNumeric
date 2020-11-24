@@ -1,2 +1,33 @@
 {% extends 'layouts/master.html' %} {% block content %}
-{% endblock %}
+<meta charset="UTF-8">
+<title>Index</title>
+
+<div class="jumbotron">
+    <h1 class="display-3">AlphaNumeric</h1>
+    <p class="lead">This is a Numerical Analysis page</p>
+    <hr class="my-4">
+    <p>You can use many methods to do great things</p>
+</div>
+
+<div class="contenedor">
+    <br>
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+            <div class="card">
+                <div class="form-row">
+                    <div class="contenedor">
+                        <div class="form-group col-md-12">
+                            <label for="eq">Function</label>
+                            <input id="eq" type="text" value="4 * sin(x) + 5 * cos(x/2)" class="form-control" placeholder=""name="f_function" required />
+                        </div>
+                        <div class="form-group col-md-12">
+                            <button type="submit" value="Draw" onclick="draw()" class="btn btn-outline-success btn-block">Chart</button>
+                        </div>
+                    </div>
+                    <div id="plot"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}

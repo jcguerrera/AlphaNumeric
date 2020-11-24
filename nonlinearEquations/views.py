@@ -9,6 +9,8 @@ from Metodos.falseRule import falseRule
 from Metodos.IncrementalSearch import incremental_search
 from Metodos.secante import secant
 from Metodos.raices_mult import roots_mult
+from Metodos.newton import newtonn
+from Metodos.fixedPoint import fixedPointt
 # Create your views here.
 
 
@@ -58,8 +60,11 @@ def falseRuleP(request):
         iter = request.POST.get('tol')
 
         print(funcion, a, b, nIter, iter)
-        data = falseRule(float(a), float(b), str(funcion), float(nIter), float(iter))
-        print(data)
+        try:
+            data = falseRule(float(a), float(b), str(funcion), float(nIter), float(iter))
+        except:
+            return render(request, "falseRule.html",{'message':'Error: Something went wrong'})
+        #print(data)
 
         return render(request, "falseRule.html", {'data': data,'message':data['message']})
 
@@ -107,3 +112,46 @@ def raices_multiplesP(request):
         
         
     return render(request, "raices_multiples.html",{'raices_multiples':''})
+
+
+def newton(request):
+    if 'f_function' in request.POST:
+        function = request.POST.get('f_function')
+        x0 = request.POST.get('x0')
+        i = request.POST.get('iter')
+        tol = request.POST.get('tol')
+
+        function= function.replace(' ', '')
+
+        try:
+            
+            data = newtonn(str(function), float(x0), int(i), float(tol))
+            return render(request, "newton.html", {'data': data, 'message' : data['message']})
+
+        except: 
+            print(2)
+            return render(request, "newton.html", {'data': ''})
+    return render(request, "newton.html",{'data':''})
+
+
+def fixedPoint(request):
+    if 'f_function1' in request.POST:
+        function1 = request.POST.get('f_function1')
+        function2 = request.POST.get('f_function2')
+        xa = request.POST.get('xa')
+        i = request.POST.get('iter')
+        tol = request.POST.get('tol')
+
+        function1 = function1.replace(' ', '')
+        function2 = function2.replace(' ', '')
+
+        try:
+            print(1)
+            data = fixedPointt(str(function1), str(function2), float(xa), int(i), float(tol))
+            print(data)
+            return render(request, "fixedPoint.html", {'data': data, 'message' : data['message']})
+
+        except: 
+            print(2)
+            return render(request, "fixedPoint.html", {'data': ''})
+    return render(request, "fixedPoint.html",{'data':''})

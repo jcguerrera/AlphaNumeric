@@ -1,0 +1,85 @@
+{% extends 'layouts/master.html' %} {% block content %}
+<meta charset="UTF-8">
+    <title>Methods</title>
+<head></head>
+<body>
+    
+
+<div class="jumbotron">
+    <h1>Nonlinear Equations</h1>
+    <p class="lead">Open Methods</p>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <a type="button" href="/busquedas/" class="btn btn-secondary">Incremetal Search</a>
+            <a type="button"  class="btn btn-info">Fixed Point</a>
+            <a type="button" class="btn btn-secondary">Newton</a>
+            <a type="button" href="/secante/" class="btn btn-info">Secant</a>
+            <a type="button" href="/raices_multiples/" class="btn btn-secondary">Multiple Roots</a>
+        </div>
+    </div>
+    <p class="lead">Closed Methods</p>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <a type="button" href="/reglafalsa/" class="btn btn-secondary">False Rule</a>
+            <a type="button" href="/biseccion/" class="btn btn-info">Bisection</a>
+        </div>
+    </div>
+</div>
+<div class="jumbotron">
+    <h1>Gaussian Elimination</h1>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <a type="button" href="/gaussian_elimination/" class="btn btn-secondary">Simple</a>
+            <a type="button" href="/gaussian_elimination/" class="btn btn-info">Partial</a>
+            <a type="button" href="/gaussian_elimination/" class="btn btn-secondary">Total</a>
+        </div>
+    </div>
+</div>
+<div class="jumbotron">
+    <h1>LU Factorization</h1>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <a type="button" href="/LU_Factorization/" class="btn btn-secondary">Simple</a>
+            <a type="button" href="/LU_Factorization/" class="btn btn-info">Partial</a>
+            <a type="button" class="btn btn-secondary">Dolittle</a>
+            <a type="button" class="btn btn-info">Cholesky</a>
+            <a type="button" class="btn btn-secondary">Crout</a>
+        </div>
+    </div>
+</div>
+<div class="jumbotron">
+    <h1>Iterative</h1>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <a type="button" href="/sor/" class="btn btn-secondary">Sor</a>
+            <a type="button" href="/jacobi/" class="btn btn-info">Jacobi</a>
+            <a type="button" class="btn btn-secondary">Gausseidel</a>
+        </div>
+    </div>
+</div>
+<div class="jumbotron">
+    <h1>Interpolation</h1>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <a type="button" href="/splines/" class="btn btn-secondary">Splines</a>
+            <a type="button" href="/divide_diferencies/" class="btn btn-info">divided differences</a>
+            <a type="button" href="/lagrangeP/" class="btn btn-secondary">Lagrange</a>
+            <a type="button" href="/vandermonde/" class="btn btn-info">Vandermonde</a>
+        </div>
+    </div>
+</div>
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/5fbd7f11920fc91564ca4fc8/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+{% endblock %}
+</body>

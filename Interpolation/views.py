@@ -25,8 +25,10 @@ def lagrangeP(request):
             for j in range(1,len(x)):
                 if(x[i]==x[j]):
                     return render(request, "lagrange.html", {'message': 'Error: There are equal values of x'})
-
-        data = lagrange(x, y)
+        try:
+            data = lagrange(x, y)
+        except:
+            return render(request, "lagrange.html",{'message':'Error: Something went wrong'})
         return render(request, "lagrange.html", {'polinomio': data})
     return render(request, "lagrange.html", {'polinomio': ''})
 
@@ -44,8 +46,11 @@ def vandermondeP(request):
                 return render(request, "vandermonde.html", {'message': 'Insert Vector X\'s data in a incremental order'})
             for j in range(1,len(x)):
                 if(x[i]==x[j]):
-                    return render(request, "lagrange.html", {'message': 'Error: There are equal values of x'})
-        data = vandermonde(x, y)
+                    return render(request, "vandermonde.html", {'message': 'Error: There are equal values of x'})
+        try:
+            data = vandermonde(x, y)
+        except:
+            return render(request, "vandermonde.html",{'message':'Error: Something went wrong'})
         ecuacion=''
         for i in data[0]:
             n=n-1
