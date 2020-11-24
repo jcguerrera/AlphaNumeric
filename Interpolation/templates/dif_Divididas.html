@@ -50,58 +50,70 @@
 
 </head>
 <body>
-<div class="container matrix">
-    <div class="row justify-content-center sizeMatrix">
-        <div class="col-md-12">
-            <form method="POST" action="/divide_diferencies/" class="form">
-                {% csrf_token %}
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label>Dimension de la matriz</label>
-                        <input type="number" id="dimension" min="2" class="form-control" placeholder="Matrix dimension" name="n" step="any" required />
+<div class="contenedor">
+    <br>
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+            <div class="card">
+                <h1>Newton</h1>
+                <div class="container matrix">
+                    <div class="row justify-content-center sizeMatrix">
+                        <div class="col-md-12">
+                            <form method="POST" action="/divide_diferencies/" class="form">
+                                {% csrf_token %}
+                                 <div class="form-row">
+                                    <div class="form-group col-md-5">
+                                        <label>Vector Size</label>
+                                        <input type="number" id="dimension" min="2" class="form-control" placeholder="Matrix dimension" name="n" step="any" required />
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                     <button id="filldetails" onclick="addFields()" class="btn btn-outline-primary">Create Vector</button>
+                                    </div>
+                                </div>
+                                <div id="vector_b" class="text-align metodo">Vector X </div>
+                                <div id="vector" class="text-align"> </div>
+                                <div id="vector_x0" class="text-align metodo">Vector Y</div>
+                                <div id="vectorx" class="text-align"> </div><br>
+
+                                <div class="form-row">
+                                    <br>
+                                   <div class="form-group col-md-6">
+                                       <button id="solve" type="submit" class="btn btn-outline-success">Solve</button>
+                                   </div>
+                                </div>
+                            </form>
+                          {% if message%}
+                           <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <strong>This method does not work</strong> {{ message}}.
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                          {% endif %}
+
+                            {% if  Polinomio and D %}
+                                <h5 >Polinomio: </h5><br>
+                                <h5 class="text-center">\({{Polinomio}}\)</h5><br>
+                                <h5 >D:</h5><br>
+                                \begin{pmatrix}
+
+                                {% for v in D %}
+                                    {% for p in v %}
+                                    {{p}}&
+                                    {% endfor %}
+                                    \\
+                                {% endfor %}
+                                \end{pmatrix}
+                            {% endif %}
+                        </div>
+
                     </div>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <button id="filldetails" onclick="addFields()" class="btn btn-primary">Crear</button>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <button id="solve" type="submit" class="btn btn-success">Calcular</button>
-                    </div>
-                </div>
-                <div id="vector_b" class="text-align metodo">Vector X </div>
-                <div id="vector" class="text-align"> </div>
-
-                <div id="vector_x0" class="text-align metodo">Vector Y</div>
-                <div id="vectorx" class="text-align"> </div>
-
-            </form>
-          {% if message%}
-           <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            <strong>This method does not work</strong> {{ message}}.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-            </button>
             </div>
-          {% endif %}
-
-            {% if  Polinomio and D %}
-                <h5 >Polinomio: </h5><br>
-                <h5 class="text-center">\({{Polinomio}}\)</h5><br>
-                <h5 >D:</h5><br>
-                \begin{pmatrix}
-
-                {% for v in D %}
-                    {% for p in v %}
-                    {{p}}&
-                    {% endfor %}
-                    \\
-                {% endfor %}
-                \end{pmatrix}
-            {% endif %}
         </div>
-
     </div>
 </div>
 </body>

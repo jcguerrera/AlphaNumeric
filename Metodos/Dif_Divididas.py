@@ -9,7 +9,7 @@ def divide_dif(x,y):
             validate = True
             break
     if(validate):
-        message= 'There are similar point in vector X'
+        message= 'There are similar points in vector X'
         return None,None,message
     else:
         n = len(x)
