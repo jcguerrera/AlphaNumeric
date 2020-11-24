@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Bisection</title>
+    <title>False Rule</title>
 </head>
 
 <div class="contenedor">
@@ -11,12 +11,12 @@
 
         <div class="col-md-8">
             <div class="card">
-                <h1>Regla Falsa</h1>
+                <h1>False Rule</h1>
                 <form method="POST" action="/reglafalsa/" class="form">
                     {% csrf_token %}
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <label for="eq">Funcion</label>
+                            <label for="eq">Function</label>
                             <input id="eq" type="text" value="4 * sin(x) + 5 * cos(x/2)" class="form-control" placeholder="" name="f_function" required />
                         </div>
                     </div>
@@ -32,23 +32,23 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label>Numero Iteraciones</label>
+                            <label>Number of Iterations</label>
                             <input type="number" class="form-control" placeholder="" name="nIter" step="any" required />
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Tolerancia</label>
+                            <label>Tolerance</label>
                             <input type="number" class="form-control" placeholder="" name="tol" step="any" required />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <button type="submit" class="btn btn-outline-success btn-block">Calcular</button>
-                            <button type="submit" value="Draw" onclick="draw()" class="btn btn-outline-success btn-block">Graficar</button>
+                            <button type="submit" class="btn btn-outline-success btn-block">Calculate</button>
+                            <button type="submit" value="Draw" onclick="draw()" class="btn btn-outline-success btn-block">Chart</button>
                         </div>
                     </div>
                 </form>
                 <div id="plot"></div>
-                <h5>Respuesta:</h5>
+                <h5>Response:</h5>
                 <label for="">{{message}}</label>
                 <ul>
                     {% if data %}
@@ -56,7 +56,7 @@
                         <table class="table table-striped text-center table-BusquedasIncrementales">
                             <thead>
                                 <tr>
-                                    <th>Iteracion</th>
+                                    <th>Iteration</th>
                                     <th>a</th>
                                     <th>c</th>
                                     <th>b</th>

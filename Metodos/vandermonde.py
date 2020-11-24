@@ -1,4 +1,5 @@
 from Metodos.GaussianElimination import *
+import copy
 
 def vandermonde(x, y):
     matriz = []
@@ -12,7 +13,8 @@ def vandermonde(x, y):
         fila+=1
     print('A:')
     printMatriz(matriz)
-    return totalGaussianElimination(matriz, y)[0]
+    matrizTosend = copy.deepcopy(matriz)
+    return (totalGaussianElimination(matriz, y)[0],matrizTosend)
     
 
 #x = [-1, 0, 3, 4]

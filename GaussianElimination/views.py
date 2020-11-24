@@ -16,8 +16,10 @@ def GaussianEliminationP(request):
             for j in range(n):
                 fila.append(int(request.POST.get('matrix'+str(i)+str(j))))
             matrix.append(fila)
-        print(matrix)
-        print(b)
+        for i in matrix:
+            for j in matrix:
+                if(i==j):
+                    return render(request, "matriz.html",{'message':'Error: there are equal rows, Division by zero imminent'})
         result = ()
         if method == 'S':
             result = simpleGaussianElimination(matrix,b)
