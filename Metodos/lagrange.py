@@ -30,9 +30,9 @@ def lagrange(x, y):
     polinomio = ''
     while(i<len(l)):
         if(lf[i]>=0):
-            polinomio+= ' + '+str(lf[i])+l[i]
+            polinomio+= ' + '+str(round(lf[i],3))+l[i]
         else:
-            polinomio+= ' '+str(lf[i])+l[i]
+            polinomio+= ' '+str(round(lf[i],3))+l[i]
         i+=1
     return(polinomio)
 

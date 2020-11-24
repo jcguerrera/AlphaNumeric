@@ -9,46 +9,48 @@ from Metodos.Dif_Divididas import divide_dif
 # Create your views here.
 
 def lagrangeP(request):
-    if 'x' in request.POST:
-        x = request.POST.get('x')
-        y = request.POST.get('y')
-        x = x.split(',')
-        y = y.split(',')
-        if len(x) == len(y):
-            for i in range(len(x)):
-                try:
-                    x[i] = float(x[i])
-                    y[i] = float(y[i])
-                except:
-                    return render(request, "lagrange.html", {'polinomio': 'error: valores inválidos'})
-            print(x, y)
-            data = lagrange(x, y)
-            return render(request, "lagrange.html", {'polinomio': data})
-        else:
-            return render(request, "lagrange.html",
-                          {'polinomio': 'el tamaño de los vectores es diferente o el separador no es el indicado'})
+    if 'n' in request.POST:
+        n = int(request.POST.get('n'))
+        x = []
+        y = []
+        for i in range(n):
+            x.append(float(request.POST.get('vector'+str(i))))
+            y.append(float(request.POST.get('vectorb'+str(i))))
+        for i in range(1,len(x)):
+            if(x[i]<x[i-1]):
+                return render(request, "lagrange.html", {'message': 'Insert Vector X\'s data in a incremental order'})
+            for j in range(1,len(x)):
+                if(x[i]==x[j]):
+                    return render(request, "lagrange.html", {'message': 'Error: There are equal values of x'})
+
+        data = lagrange(x, y)
+        return render(request, "lagrange.html", {'polinomio': data})
     return render(request, "lagrange.html", {'polinomio': ''})
 
 
 def vandermondeP(request):
-    if 'x' in request.POST:
-        x = request.POST.get('x')
-        y = request.POST.get('y')
-        x = x.split(',')
-        y = y.split(',')
-        if len(x) == len(y):
-            for i in range(len(x)):
-                try:
-                    x[i] = float(x[i])
-                    y[i] = float(y[i])
-                except:
-                    return render(request, "vandermonde.html", {'polinomio': 'error: valores inválidos'})
-            print(x, y)
-            data = vandermonde(x, y)
-            return render(request, "vandermonde.html", {'polinomio': data})
-        else:
-            return render(request, "vandermonde.html",
-                          {'polinomio': 'el tamaño de los vectores es diferente o el separador no es el indicado'})
+    if 'n' in request.POST:
+        n = int(request.POST.get('n'))
+        x = []
+        y = []
+        for i in range(n):
+            x.append(float(request.POST.get('vector'+str(i))))
+            y.append(float(request.POST.get('vectorb'+str(i))))
+        for i in range(1,len(x)):
+            if(x[i]<x[i-1]):
+                return render(request, "vandermonde.html", {'message': 'Insert Vector X\'s data in a incremental order'})
+            for j in range(1,len(x)):
+                if(x[i]==x[j]):
+                    return render(request, "lagrange.html", {'message': 'Error: There are equal values of x'})
+        data = vandermonde(x, y)
+        ecuacion=''
+        for i in data[0]:
+            n=n-1
+            if(i>=0):
+                ecuacion+='+'+str(i)+'x^'+str(n)
+            else:
+                ecuacion+=str(i)+'x^'+str(n)
+        return render(request, "vandermonde.html", {'polinomio': data[0],'matriz':data[1], 'ecuacion':ecuacion})
     return render(request, "vandermonde.html", {'polinomio': ''})
 
 

@@ -1,25 +1,103 @@
 {% extends 'layouts/master.html' %} {% block content %}
+<head>
+    <script type='text/javascript'>
+        function addFields() {
+            // Number of inputs to create
+            var number = document.getElementById("dimension").value;
+            // Container <div> where dynamic content will be placed
+            var container_vector = document.getElementById("vector");
+            var container_vectorb = document.getElementById("vectorb");
+            // Clear previous contents of the container
+            while (container_vector.hasChildNodes()) {
+                container_vector.removeChild(container_vector.lastChild);
+            }
+            while (container_vectorb.hasChildNodes()) {
+                container_vectorb.removeChild(container_vectorb.lastChild);
+            }
+            if (number > 1) {
+                for (i = 0; i < number; i++) {
+                    // Append a node with a random text
+                    container_vector.appendChild(document.createTextNode(""));
+                    // Create an <input> element for vector B, set its type and name attributes
+                    var vector = document.createElement("input");
+                    vector.type = "number";
+                    vector.name = "vector" + i;
+                    vector.style = "width : 110px;";
+                    vector.step = "any";
+                    vector.required = true;
+                    container_vector.appendChild(vector);
+
+                    // Append a node with a random text
+                    container_vectorb.appendChild(document.createTextNode(""));
+                    // Create an <input> element for vector B, set its type and name attributes
+                    var vectorb = document.createElement("input");
+                    vectorb.type = "number";
+                    vectorb.name = "vectorb" + i;
+                    vectorb.style = "width : 110px;";
+                    vectorb.step = "any";
+                    vectorb.required = true;
+                    container_vectorb.appendChild(vectorb);
+                }
+                document.getElementById("separador").style.display = 'block';
+                document.getElementById("vector_b").style.display = 'block';
+                document.getElementById("vector_bb").style.display = 'block';
+                document.getElementById("solve").style.display = 'block';
+            }
+        }
+    </script>
+    <meta charset="UTF-8">
+    <title>Vandermonde</title>
+</head>
 <div class="contenedor">
     <br>
     <div class="row justify-content-center">
 
         <div class="col-md-8">
             <div class="card">
-                <h1>VANDERMONDE</h1>
+                <h1>\(VANDERMONDE\)</h1>
                 <form method="POST" action="/vandermonde/">
                     {% csrf_token %}
-                    <label for=" ">Ingrese los valores de los vectores</label><br>
-                    <label for=" ">-Use la "," para separar los valores</label><br>
-                    <label for="fname">X:</label><br>
-                    <input type="text" id="x" name="x" required><br>
-                    <label for="lname">Y:</label><br>
-                    <input type="text" id="y" name="y" required><br><br>
-                    <div class="form-group col-md-12">
-                        <button type="submit" class="btn btn-outline-success btn-block">Ingresar</button>
+                    <div class="form-group col-md-6">
+                        <label>Vector's Length:</label>
+                        <input type="number" id="dimension" min="2" class="form-control" placeholder="Vector dimension" name="n" step="any" required />
                     </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <button id="filldetails" onclick="addFields()" class="btn btn-primary">Create</button>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <button id="solve" type="submit" class="btn btn-success">Calculate</button>
+                        </div>
+                    </div>
+                    <div id="vector_b" class="text-align metodo">Vector X </div>
+                    <div id="vector" class="text-align"> </div>
+                    <div id="vector_bb" class="text-align metodo">Vector Y </div>
+                    <div id="vectorb" class="text-align"> </div>
                 </form>
-                <h5>Coeficientes</h5>
-                <h5>\({{polinomio}}\)</h5>
+                <div class="form-group col-md-6">
+                {% if matriz %}
+                <h5>\(Coeficientes:\)</h5>
+                \begin{bmatrix}
+                    {% for p in polinomio %}
+                        {{p}}\\
+                    {% endfor %}
+                \end{bmatrix}
+                <h5>Ecuacion:</h5>
+                <h5>\({{ecuacion}}\)</h5>
+                <h5>Matriz:</h5>
+                \begin{bmatrix}
+                            {% for  v in matriz %}
+                                {% for p in v %}
+                                    {{p}}&
+                                {% endfor %}
+                                \\
+                            {% endfor %}
+                            \end{bmatrix}
+                {% endif %}
+                {% if message %}
+                <h5>{{message}}</h5>
+                {% endif %}
+            </div>
             </div>
         </div>
     </div>

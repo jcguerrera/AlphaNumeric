@@ -57,28 +57,28 @@
                 {% csrf_token %}
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>dimension de la matriz</label>
+                        <label>Matriz's length</label>
                         <input type="number" id="dimension" min="2" class="form-control" placeholder="Matrix dimension" name="n" step="any" required />
                     </div>
                     <!-- este div es el que pone feo la vista -->
                     <div class="form-group col-md-6">
-                        <label> Metodo</label>
+                        <label> Method</label>
                         <select name="method_type" class="form-control">
                             <option value="S">Simple</option> 
-                            <option value="P">Parcial</option>
+                            <option value="P">Partial</option>
                             <option value="T">Total</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <button id="filldetails" onclick="addFields()" class="btn btn-primary">Crear</button>
+                        <button id="filldetails" onclick="addFields()" class="btn btn-primary">Create</button>
                     </div>
                     <div class="form-group col-md-6">
-                        <button id="solve" type="submit" class="btn btn-success">Calcular</button>
+                        <button id="solve" type="submit" class="btn btn-success">Calculate</button>
                     </div>
                 </div>
-                <div id="matrix_a" class="text-align metodo"> Matriz A </div>
+                <div id="matrix_a" class="text-align metodo"> Matrix A </div>
                 <div id="matrix" class="text-align"> </div>
 
                 <div id="vector_b" class="text-align metodo">Vector b </div>
@@ -88,6 +88,9 @@
     </div>
 </div>
 <ul>
+    {% if message %}
+    <h5>{{message}}</h5>
+    {% endif %}
     {% if steps %}
     <h5>X:</h5>
     <h5>{{x}}</h5>
@@ -95,8 +98,8 @@
         <table class="table table-striped text-center table-BusquedasIncrementales">
             <thead>
                 <tr>
-                    <th>Etapa</th>
-                    <th>Matriz</th>
+                    <th>Step</th>
+                    <th>Matrix</th>
                 </tr>
             </thead>
             <tbody>
