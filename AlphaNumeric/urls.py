@@ -52,4 +52,5 @@ urlpatterns = [
     path('newton/',NoLinearEquations.newton, name ='newton'),
     path('fixedPoint/',NoLinearEquations.fixedPoint, name ='fixedPoint'),
     path('doolittle/',LU_Factorization.doolittle, name ='doolittle'),
+    path('crout/',LU_Factorization.crout, name ='crout'),
 ]
