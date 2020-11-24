@@ -1,0 +1,92 @@
+{% extends 'layouts/master.html' %} {% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Fixed Point</title>
+</head>
+
+<div class="contenedor">
+    <br>
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+            <div class="card">
+                <h1>Fixed Point</h1>
+                <form method="POST" action="/fixedPoint/" class="form">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="eq">Function F</label>
+                            <input id="eq" type="text" value="x^3 + 4 * x^2 - 10" class="form-control" placeholder="" name="f_function1" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="eq">Function G</label>
+                            <input id="eq" type="text" value="(10/(x+4))^(1.0/2)" class="form-control" placeholder="" name="f_function2" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>xa</label>
+                            <input type="number" step="0.01" class="form-control" placeholder="" name="xa" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Number of Iterations</label>
+                            <input type="number" class="form-control" placeholder="" name="iter" step="any" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Tolerance</label>
+                            <input type="number" class="form-control" placeholder="" name="tol" step="any" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-outline-success btn-block">Calculate</button>
+                            <button type="submit" value="Draw" onclick="draw()" class="btn btn-outline-success btn-block">Chart</button>
+                        </div>
+                    </div>
+                </form>
+                <div id="plot"></div>
+                <h5>Response:</h5>
+                <label for="">{{message}}</label>
+                <ul>
+                    {% if data %}
+                    <div class="row justify-content-center">
+                        <table class="table table-striped text-center table-BusquedasIncrementales">
+                            <thead>
+                                <tr>
+                                    <th>Iteration</th>
+                                    <th>xa</th>
+                                    <th>xn</th>
+                                    <th>Fx</th>
+                                    <th>error</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ul>
+                                    {% for key,value in data.items %}
+                                    <tr>
+                                        <th>{{ key}}</th>
+                                        <th>{{ value.0}}</th>
+                                        <th>{{ value.1}}</th>
+                                        <th>{{ value.2}}</th>
+                                        <th>{{ value.3}}</th>
+                                    </tr>
+                                    {% endfor %}
+                                </ul>
+                            </tbody>
+                        </table>
+                    </div>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

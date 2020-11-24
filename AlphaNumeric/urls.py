@@ -47,4 +47,6 @@ urlpatterns = [
     path('raices_multiples/', NoLinearEquations.raices_multiplesP, name='raices_multiples'),
     path('divide_diferencies/',Diferencies._NewtonP, name ='divide_diferencies'),
     path('index/', AlphaNumeric_views.index, name='alpha_views'),
+    path('newton/',NoLinearEquations.newton, name ='newton'),
+    path('fixedPoint/',NoLinearEquations.fixedPoint, name ='fixedPoint'),
 ]

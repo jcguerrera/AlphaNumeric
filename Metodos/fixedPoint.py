@@ -1,29 +1,40 @@
 import math
+import sympy as sm
 
-def f(x):
-    return x**3 + 4 * x**2 - 10
+def fixedPointt(function1, function2, xa, iter, tol):
 
-def g(x):
-    return math.sqrt(10/(x+4))
+    print(xa)
+    print(iter)
+    print(tol)
+    results = {}
 
-def fixedPoint(xa, iter, tol):
-    fx = f(xa)
+    x = sm.symbols('x')
+    function1 = sm.sympify(function1)
+    function2 = sm.sympify(function2)
+    print(function1)
+    print(function2)
+
+    fx = function1.subs(x, xa)
+
     cont = 0
-    error = tol + 1
     xn = 0
 
+    error = tol + 1
     while((fx != 0) and error > tol and cont < iter):
-        xn = g(xa)
-        fx = f(xn)
+        xn = function2.subs(x, xa)
+        fx = function1.subs(x, xn)
         error = abs(xn - xa)
+        results[cont]=[float(xa),float(xn),float(fx),float(error)]
         xa = xn
         cont += 1
     
     if fx == 0:
-        print("Xa: ", xa, " is a root")
+        results['message'] = ("Xa: " + str(xa) + " is a root")
     elif error < tol :
-        print("Xa: ", xa, " approximate root with tolerance: ", tol)
+        results['message'] = ("Xa: " + str(xa) + " approximate root with tolerance: " + str(tol))
     else:
-        print("Fail in iteration: ", iter)
+        results['message'] = ("Fail in iteration: " + str(iter))
+    
+    return results
 
-fixedPoint(1.5, 11, 0.000000005)
+#print(fixedPointt('x**3 + 4 * x**2 - 10', '(10/(x+4))^(1.0/2)', float(1.5), 11, float(0.000000005)))
