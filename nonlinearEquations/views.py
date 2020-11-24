@@ -55,8 +55,11 @@ def falseRuleP(request):
         iter = request.POST.get('tol')
 
         print(funcion, a, b, nIter, iter)
-        data = falseRule(float(a), float(b), str(funcion), float(nIter), float(iter))
-        print(data)
+        try:
+            data = falseRule(float(a), float(b), str(funcion), float(nIter), float(iter))
+        except:
+            return render(request, "falseRule.html",{'message':'Error: Something went wrong'})
+        #print(data)
 
         return render(request, "falseRule.html", {'data': data,'message':data['message']})
 
