@@ -71,10 +71,13 @@ def secanteP(request):
         i = request.POST.get('i')
         t = request.POST.get('t')
         f = request.POST.get('f')
-
         funcion= f.replace(' ', '')
-        data = secant(float(x0),float(x1),float(i),float(t),funcion)
-        return render(request, "secante.html",{'data':data[0],'add':data[1]})
+        try:
+            data = secant(float(x0),float(x1),float(i),float(t),funcion)
+            return render(request, "secante.html",{'data':data[0],'add':data[1]})
+        except:
+            return render(request, "secante.html",{'message':"You should check in on some of those matrix fields"})
+
     return render(request, "secante.html",{'secante':''})
 
 
@@ -90,6 +93,14 @@ def raices_multiplesP(request):
         funcion_1= f1.replace(' ', '')
         funcion_2= f2.replace(' ', '')
         funcion_3= f3.replace(' ', '')
-        data = roots_mult(float(x0),float(i),float(t),funcion_1,funcion_2,funcion_3)
-        return render(request, "raices_multiples.html",{'data':data[0],'add':data[1]})
+        try:
+            
+            data = roots_mult(float(x0),float(i),float(t),funcion_1,funcion_2,funcion_3)
+            return render(request, "raices_multiples.html",{'data':data[0],'add':data[1]})
+
+        except: 
+            return render(request, "raices_multiples.html",{'message':"You should check in on some of those matrix fields"})
+
+        
+        
     return render(request, "raices_multiples.html",{'raices_multiples':''})

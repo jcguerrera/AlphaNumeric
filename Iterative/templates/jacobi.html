@@ -1,8 +1,15 @@
 {% extends 'layouts/master.html' %} {% block content %}
 
 <head>
+    <meta charset="UTF-8">
+    <title>Jacobi</title>
     <script type='text/javascript'>
         function addFields() {
+            
+            document.getElementById('matrix_a').style.display = 'block';
+                document.getElementById("vector_b").style.display = 'block';
+                document.getElementById("vector_x0").style.display = 'block';
+
             // Number of inputs to create
             var number = document.getElementById("dimension").value;
             // Container <div> where dynamic content will be placed
@@ -61,66 +68,82 @@
                 document.getElementById("vector_b").style.display = 'block';
                 document.getElementById("vector_x0").style.display = 'block';
                 document.getElementById("solve").style.display = 'block';
+                document.getElementById('obj2').style.display = 'block';
             }
+
         }
     </script>
 </head>
-<div class="container matrix">
-    <div class="row justify-content-center sizeMatrix">
-        <div class="col-md-12">
+
+<div class="container">
+     <br>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+        <div class="card">
+         <h1> Jacobi</h1>
             <form method="POST" action="/jacobi/" class="form">
                 {% csrf_token %}
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <h3>Dimension de la matriz</h3>
-                        <input type="number" id="dimension" min="2" class="form-control" placeholder="Matrix dimension" name="n" step="any" required />
+                    <div class="form-group col-md-12" >
+                        <label>Matrix dimension</label>
+                        <input type="number" id="dimension" min="2" max="100" class="form-control" placeholder="Matrix dimension" name="n" step="any" required />
                     </div>
 
                 </div>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <button id="filldetails" onclick="addFields()" class="btn btn-primary">Crear</button>
+                    <div class="form-group col-md-12">
+                        <button id="filldetails" onclick="addFields()" class="btn btn-outline-success btn-block">Create</button>
                     </div>
 
                 </div>
 
 
 
-                <div id="matrix_a" class="text-align metodo"> Matriz A </div>
+                <div id="matrix_a" class="text-align metodo" style="display:none"> Matrix A </div>
                 <div id="matrix" class="text-align"> </div>
 
-                <div id="vector_b" class="text-align metodo">Vector b </div>
+                <div id="vector_b" class="text-align metodo" style="display:none">Vector b </div>
                 <div id="vector" class="text-align"> </div>
 
-                <div id="vector_x0" class="text-align metodo">Vector X0</div>
+                <div id="vector_x0" class="text-align metodo" style="display:none">Vector X0</div>
                 <div id="vectorx" class="text-align"> </div>
 
 
                 <div class="form-row">
                 <div class="form-group col-md-6">
-                <h3>Numero Iteraciones</h3>
+                <label>Number Iterations</label>
                 <input type="number" class="form-control" placeholder="" name="i" step="any" required />
                 </div>
-                </div>
-                <div class="form-row">
                 <div class="form-group col-md-6">
-                <h3>Tolerancia</h3>
+                <label>Tolerance</label>
                 <input type="number" class="form-control" placeholder="" name="t" step="any" required />
                 </div>
                 </div>
-<div class="form-row">
 
-                                    <div class="form-group col-md-6">
-                        <button id="solve" type="submit" class="btn btn-success">Calcular</button>
+                <div class="form-row">
+
+                                    <div class="form-group col-md-12">
+                        <button id="solve" type="submit" class="btn btn-outline-success btn-block">Calculate</button>
                     </div>
                     </div>
+
+                    {% if message%}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>This method does not work.</strong>  
+                                {{message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                             {% endif %}
+
             </form>
         </div>
     </div>
 </div>
         <ul>
             {% if data %}
-                <h5 >Radio Espectral: </h5>
+                <label>Spectral Radius: </label>
                 <h5>{{spectralRadius}}</h5><br>
                 <h5 >C: </h5>
                 <h5>{{C}}</h5><br>
@@ -132,7 +155,7 @@
                     <table class="table table-striped text-center  col-md-15 table-BusquedasIncrementales">
                         <thead>
                         <tr>
-                            <th>Iteracion</th>
+                            <th>Iteration</th>
                             <th>Error</th>
                             <th>X</th>
                         </tr>
@@ -155,7 +178,7 @@
             {% endif %}
         </ul>
 </div>
-
+</div>
 
 
 {% endblock %}
