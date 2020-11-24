@@ -21,7 +21,14 @@ from AlphaNumeric import views as AlphaNumeric_views
 from GaussianElimination import views as GaussianElimination_views
 from LUFactorization import views as LU_Factorization
 from Iterative import views as Sor
+from Iterative import views as Iteratives_views
 from Interpolation import views as Diferencies
+
+
+admin.autodiscover()
+
+
+from Interpolation import views as Interpolation_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,6 +41,10 @@ urlpatterns = [
     path('gaussian_elimination/',GaussianElimination_views.GaussianEliminationP, name ='gaussianElimination'),
     path('LU_Factorization/',LU_Factorization._simpleLU, name ='LU_Factorization'),
     path('sor/',Sor._sor, name ='sor'),
+    path('splines/', Interpolation_views.splinesP, name='splines'),
+    path('jacobi/',Iteratives_views.JacobiP, name ='jacobi'),
+    path('secante/', NoLinearEquations.secanteP, name='secante'),
+    path('raices_multiples/', NoLinearEquations.raices_multiplesP, name='raices_multiples'),
     path('divide_diferencies/',Diferencies._NewtonP, name ='divide_diferencies'),
     path('index/', AlphaNumeric_views.index, name='alpha_views'),
 ]

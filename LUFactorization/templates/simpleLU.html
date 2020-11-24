@@ -87,7 +87,8 @@
         <ul>
     {% if L and U and not P %}
     <h5>X:</h5>
-    <h5>{{x}}</h5>
+    <h5>\({{x}})\</h5>
+
     <div class="row justify-content-center ">
         <div class="col-md-12">
             <table class="table table-striped text-center ">
@@ -95,7 +96,7 @@
                     <tr>
                         <th>Etapa</th>
                         <th>Matriz L</th>
-                        <th>Matriz U</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -103,21 +104,48 @@
                         {% for key, value in L.items%}
                         <tr>
 
-                            <th>{{ key }}</th>
+                            <th>{{ key}}</th>
 
                             <th>
-                                <b>L</b>
+                                \begin{bmatrix}
 
-                                    <p>{{ value}}</p>
-
+                                    {% for v in value %}
+                                        {% for p in v %}
+                                            {{p}}&
+                                        {% endfor %}
+                                    \\
+                                    {% endfor %}
+                                \end{bmatrix}
                             </th>
-
+                        </tr>
+                        {% endfor %}
+                    </ul>
+                </tbody>
+            </table>
+        <table class="table table-striped text-center ">
+                <thead>
+                    <tr>
+                        <th>Etapa</th>
+                        <th>Matriz U</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ul>
+                        {% for key, value in U.items%}
+                        <tr>
+                            <th>{{ key}}</th>
                             <th>
-                                <b>U</b>
-                                {% for u in U.items%}
-                                    <p>{{ u.key }}</p>
-                                {% endfor %}
+                                \begin{bmatrix}
+
+                                    {% for v in value %}
+                                        {% for p in v %}
+                                            {{p}}&
+                                        {% endfor %}
+                                    \\
+                                    {% endfor %}
+                                \end{bmatrix}
                             </th>
+
                         </tr>
                         {% endfor %}
                     </ul>
@@ -128,36 +156,91 @@
     {% endif %}
     {% if L and U and P %}
         <h5>X:</h5>
-        <h5>{{x}}</h5>
+        <h5>\({{x}}\)</h5>
         <div class="row justify-content-center ">
             <div class="col-md-12">
                 <table class="table table-striped text-center ">
-                    <thead>
-                     <tr>
+                <thead>
+                    <tr>
                         <th>Etapa</th>
                         <th>Matriz L</th>
-                        <th>Matriz U</th>
-                        <th>Matriz P</th>
+
                     </tr>
                 </thead>
                 <tbody>
                     <ul>
                         {% for key, value in L.items%}
                         <tr>
-                            <th>{{ key }}</th>
+
+                            <th>{{ key}}</th>
 
                             <th>
-                                <b>L</b>
-                                {% for v in value %}
-                                    <p>{{ v }}</p>
-                                {% endfor %}
+                                \begin{bmatrix}
+
+                                    {% for v in value %}
+                                        {% for p in v %}
+                                            {{p}}&
+                                        {% endfor %}
+                                    \\
+                                    {% endfor %}
+                                \end{bmatrix}
+                            </th>
+                        </tr>
+                        {% endfor %}
+                    </ul>
+                </tbody>
+            </table>
+        <table class="table table-striped text-center ">
+                <thead>
+                    <tr>
+                        <th>Etapa</th>
+                        <th>Matriz U</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ul>
+                        {% for key, value in U.items%}
+                        <tr>
+                            <th>{{ key}}</th>
+                            <th>
+                                \begin{bmatrix}
+
+                                    {% for v in value %}
+                                        {% for p in v %}
+                                            {{p}}&
+                                        {% endfor %}
+                                    \\
+                                    {% endfor %}
+                                \end{bmatrix}
                             </th>
 
+                        </tr>
+                        {% endfor %}
+                    </ul>
+                </tbody>
+            </table>
+            <table class="table table-striped text-center ">
+                <thead>
+                    <tr>
+                        <th>Etapa</th>
+                        <th>Matriz P</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <ul>
+                        {% for key, value in P.items%}
+                        <tr>
+                            <th>{{ key}}</th>
                             <th>
-                                <b>U</b>
-                                {% for u in valueU%}
-                                    <p>{{ u }}</p>
-                                {% endfor %}
+                                \begin{bmatrix}
+
+                                    {% for v in value %}
+                                        {% for p in v %}
+                                            {{p}}&
+                                        {% endfor %}
+                                    \\
+                                    {% endfor %}
+                                \end{bmatrix}
                             </th>
                         </tr>
                         {% endfor %}

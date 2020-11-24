@@ -1,0 +1,145 @@
+{% extends 'layouts/master.html' %} {% block content %}
+
+<head>
+
+    <script type='text/javascript'>
+
+        function addFields() {
+            // Number of inputs to create
+            var number = document.getElementById("dimension").value;
+            // Container <div> where dynamic content will be placed
+
+            var container_vector = document.getElementById("vector");
+            var container_vectorX = document.getElementById("vectorx");
+            // Clear previous contents of the container
+            while (container_vector.hasChildNodes()) {
+                container_vector.removeChild(container_vector.lastChild);
+                container_vectorX.removeChild(container_vectorX.lastChild);
+            }
+            if (number > 1) {
+                for (i = 0; i < number; i++) {
+
+                    // Append a node with a random text
+                    container_vector.appendChild(document.createTextNode(""));
+                    // Create an <input> element for vector B, set its type and name attributes
+                    var vector = document.createElement("input");
+                    vector.type = "number";
+                    vector.name = "vector" + i;
+                    vector.style = "width : 110px;";
+                    vector.step = "any";
+                    vector.required = true;
+                    container_vector.appendChild(vector);
+
+                    container_vectorX.appendChild(document.createTextNode(""));
+                    // Create an <input> element for vector x0, set its type and name attributes
+                    var vectorX = document.createElement("input");
+                    vectorX.type = "number";
+                    vectorX.name = "vectorx" + i;
+                    vectorX.style = "width : 110px;";
+                    vectorX.step = "any";
+                    vectorX.required = true;
+                    container_vectorX.appendChild(vectorX);
+                }
+                document.getElementById("separador").style.display = 'block';
+                document.getElementById("vector_b").style.display = 'block';
+                document.getElementById("vector_x0").style.display = 'block';
+                document.getElementById("solve").style.display = 'block';
+            }
+        }
+    </script>
+
+</head>
+<body>
+<div class="container matrix">
+    <div class="row justify-content-center sizeMatrix">
+        <div class="col-md-12">
+            <form method="POST" action="/splines/" class="form">
+                {% csrf_token %}
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label>Dimension de los vectores</label>
+                        <input type="number" id="dimension" min="2" class="form-control" placeholder="Matrix dimension" name="n" step="any" required />
+                    </div>
+                </div>
+                                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <button id="filldetails" onclick="addFields()" class="btn btn-primary">Crear</button>
+                    </div>
+                    </div>
+                                <div id="vector_b" class="text-align metodo">Vector X </div>
+                <div id="vector" class="text-align"> </div>
+
+                <div id="vector_x0" class="text-align metodo">Vector Y</div>
+                <div id="vectorx" class="text-align"> </div>
+                <div class="form-row">
+                        <div class="form-group col-md-6">
+                        <label>Splines</label>
+                        <select name="method_type_splines" class="form-control">
+                            <option value="lin">Lineal</option> 
+                            <option value="cuad">Cuadrático</option>
+                            <option value="cub">Cúbico</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                     <div class="form-group col-md-6">
+                        <label> Tipos de Gaussian Elimination</label>
+                        <select name="method_type_gauss" class="form-control">
+                            <option value="S">Simple</option> 
+                            <option value="P">Parcial</option>
+                            <option value="T">Total</option>
+                        </select>
+                   </div>
+                </div> 
+
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <button id="solve" type="submit" class="btn btn-success">Calcular</button>
+                    </div>
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+<ul>
+    {% if steps %}
+    <h5>A:</h5>
+    <h5>{{A}}</h5>
+    <h5>b:</h5>
+    <h5>{{b}}</h5>
+    <h5>Trazas:</h5>
+    <h5>{{trazas}}</h5>
+    <h5>X:</h5>
+    <h5>{{x}}</h5>
+    <div class="row justify-content-center">
+        <table class="table table-striped text-center table-BusquedasIncrementales">
+            <thead>
+                <tr>
+                    <th>Etapa</th>
+                    <th>Matriz</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ul>
+                    {% for key, value in steps.items %}
+                    <tr>
+                        <th>{{ key }}</th>
+                        <th>
+                            {% for v in value %}
+                                <p>{{ v }}</p> 
+                            {% endfor %}
+                        </th>
+                    </tr>
+                    {% endfor %}
+
+                </ul>
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</ul>
+{% endblock %}

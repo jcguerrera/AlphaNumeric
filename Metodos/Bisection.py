@@ -7,8 +7,8 @@ import pandas as pd
 
 
 def bisection(funcion, xi, xs, nIter, iter):
+    results = {}
     if nIter > 0:
-        results = {}
         x = sm.symbols('x')
         fxi = sm.sympify(funcion).subs(x, xi)
         fxs = sm.sympify(funcion).subs(x, xs)
@@ -37,8 +37,9 @@ def bisection(funcion, xi, xs, nIter, iter):
             print(results)
         return results
     else:
+        results['message'] = 'Error'
         print('el intervalo no sirve')
-        sys.exit(1)
+        return results
 
 
 #print(bisection('ln((sin(x)^2)+1)-(1/2)',0,1,100,0.0000001))

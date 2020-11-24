@@ -3,8 +3,9 @@ import numpy as np
 def Jacobi(A, b, t, iter, x0):
     n = len(A)
     l = len(A[0])
+    result = {}
     if (n!=l):
-        print("A is not a square matrix please check and run again.")
+        return("A is not a square matrix please check and run again.")
     else:
         x =[None] * n
         aux=0
@@ -15,8 +16,6 @@ def Jacobi(A, b, t, iter, x0):
         C = np.zeros(n)
  
         while(error > t and cont <= iter):
-            print("")
-            print("iteration:# " + str(iteration))
             error = 0
             for i in range(0,n):
                 sum = 0
@@ -25,51 +24,50 @@ def Jacobi(A, b, t, iter, x0):
                         sum = sum + A[i][j] * x0[j]
                         T[i][j] = -A[i][j] / A[i][i]
                         C[i] = b[i] / A[i][i]
-                        
-                        
-                    
+
+
+
                 x[i] = (b[i] - sum) / A[i][i]
                 aux = x[i] - x0[i]
                 error = error + math.pow(aux, 2)
-               
+
             error = math.pow(error, 0.5)
 
-            print("error abs = " + str(error))
+
 
             for i in range(0,n):
                 x0[i] = x[i]
                 print("x"+str(i+1)+": "+str(round(x0[i],4)))
-                    
-                
 
 
+
+            result[iteration]=(float(error),x)
             iteration=iteration+1
             cont = cont+1
-            
+
+        print(result)
         print("")
         print("T: \n"+str(T))
         print("")
         print("C: \n"+str(C))
         print("")
         spectralRadius = np.amax(abs(T))
-        print("Spectral radius: \n"+str(spectralRadius))   
+        print("Spectral radius: \n"+str(spectralRadius))
 
+    
         if (error < t):
-            return x
+            return(result, T, C,spectralRadius )
         else:
-            print ("no solution reached in" + str (iter) + "iterations")
-            return        
-    
-    
-    
-if __name__ == "__main__":
-    A= [[4, -1, 0,3],
-        [1, 15.5, 3, 8],
-        [0, -1.3, -4, 1.1],
-        [14, 5, -2, 30]]
+            print ("no solution reached in " + str (iter) + " iterations")
+            return       
 
-    b = [1,1,1,1]
-    x0 = [0, 0, 0,0]
-        
-    Jacobi(A,b,math.pow(10,-7),100,x0)
     
+    
+    
+
+    
+  
+    
+
+        
+  
