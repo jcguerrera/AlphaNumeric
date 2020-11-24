@@ -62,102 +62,122 @@
       }
    </script>
 </head>
-<div class="container matrix">
-   <div class="row justify-content-center sizeMatrix">
-      <div class="col-md-12">
-         <form method="POST" action="/sor/" class="form">
-            {% csrf_token %}
-            <div class="form-row">
-               <div class="form-group col-md-6">
-                  <label>Dimension de la matriz</label>
-                  <input type="number" id="dimension" min="2" class="form-control" placeholder="Matrix dimension" name="n" step="any" required />
-               </div>
-               <div class="form-group col-md-6">
-                  <label>W</label>
-                  <input type="number" class="form-control" placeholder="" name="w" step="any" required />
-               </div>
-            </div>
-            <div class="form-row">
-               <div class="form-group col-md-6">
-                  <label>Numero Iteraciones</label>
-                  <input type="number" class="form-control" placeholder="" name="nIter" step="any" required />
-               </div>
-               <div class="form-group col-md-6">
-                  <label>Tolerancia</label>
-                  <input type="number" class="form-control" placeholder="" name="tol" step="any" required />
-               </div>
-            </div>
-            <div class="form-row">
-               <div class="form-group col-md-6">
-                  <button id="filldetails" onclick="addFields()" class="btn btn-primary">Crear</button>
-               </div>
-               <div class="form-group col-md-6">
-                  <button id="solve" type="submit" class="btn btn-success">Calcular</button>
-               </div>
-            </div>
-            <div id="matrix_a" class="text-align metodo"> Matriz A </div>
-            <div id="matrix" class="text-align"> </div>
-            <div id="vector_b" class="text-align metodo">Vector b </div>
-            <div id="vector" class="text-align"> </div>
-            <div id="vector_x0" class="text-align metodo">Vector X0</div>
-            <div id="vectorx" class="text-align"> </div>
-         </form>
-      </div>
-   </div>
-   <ul>
-      {% if message%}
-       <div class="alert alert-warning alert-dismissible fade show" role="alert">
-        <strong>This method does not work: </strong> {{message}}.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-      {% endif %}
+<div class="contenedor">
+    <br>
+    <div class="row justify-content-center">
 
-      {% if data %}
-      <h5 >Radio Espectral: </h5>
-      <h5>\({{Radio}}\)</h5>
-      <br>
-      <h5 >Coeficientes: </h5>
-      \begin{array}{c}
-      {% for i in C %}
-      {{i}}\\
-      {% endfor %}
-      \end{array}
-      <h5 >T:</h5>
-      <br>
-      \begin{pmatrix}
-      {% for v in T %}
-      {% for p in v %}
-      {{p}}&
-      {% endfor %}
-      \\
-      {% endfor %}
-      \end{pmatrix}
-      <div class="row justify-content-center">
-         <br>
-         <table class="table table-striped text-center  col-md-15 table-BusquedasIncrementales">
-            <thead>
-               <tr>
-                  <th>Iteracion</th>
-                  <th>Error</th>
-                  <th>X</th>
-               </tr>
-            </thead>
-            <tbody>
-               <ul>
-                  {% for key,value in data.items %}
-                  <tr>
-                     <th>{{ key}}</th>
-                     <th>{{ value.0}}</th>
-                     <th>{{ value.1}}</th>
-                  </tr>
-                  {% endfor %}
-               </ul>
-            </tbody>
-         </table>
-      </div>
-      {% endif %}
-   </ul>
+        <div class="col-md-8">
+            <div class="card">
+                <h1>SOR</h1>
+                <div class="container matrix">
+                   <div class="row justify-content-center sizeMatrix">
+                      <div class="col-md-12">
+                         <form method="POST" action="/sor/" class="form">
+                            {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="form-group col-md-5">
+                                        <label>Matriz Size</label>
+                                        <input type="number" id="dimension" min="2" class="form-control" placeholder="Matrix dimension" name="n" step="any" required />
+                                    </div>
+
+                                </div>
+                              <div class="form-row">
+                                 <div class="form-group col-md-6">
+                                     <button id="filldetails" onclick="addFields()" class="btn btn-outline-primary">Create Matrix</button>
+                                 </div>
+                              </div>
+                                <div id="matrix_a" class="text-align metodo"> Matrix A </div>
+                                <div id="matrix" class="text-align"> </div>
+                                <div id="vector_b" class="text-align metodo">Vector b </div>
+                                <div id="vector" class="text-align"> </div>
+                                <div id="vector_x0" class="text-align metodo">Vector X_0</div>
+                                <div id="vectorx" class="text-align"> </div>
+                              <div class="form-row">
+                                  <br>
+                               <div class="form-group col-md-10">
+                                   <br>
+                                  <label>W</label>
+                                  <input type="number" class="form-control" placeholder="W" name="w" step="any" required />
+                               </div>
+                              </div>
+                            <div class="form-row">
+                               <div class="form-group col-md-5">
+                                  <label>Iteration Quantity</label>
+                                  <input type="number" class="form-control" placeholder="Iteration Quantity" name="nIter" step="any" required />
+                               </div>
+                               <div class="form-group col-md-5">
+                                  <label>Tolerance</label>
+                                  <input type="number" class="form-control" placeholder="Tolerance" name="tol" step="any" required />
+                               </div>
+                            </div>
+                            <div class="form-row">
+
+                               <div class="form-group col-md-6">
+                                   <button id="solve" type="submit" class="btn btn-outline-success">Solve</button>
+                               </div>
+                            </div>
+
+                         </form>
+                      </div>
+                   </div>
+                   <ul>
+                      {% if message%}
+                       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>This method does not work: </strong> {{message}}.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                      {% endif %}
+
+                      {% if data %}
+                      <h5 >Radio Espectral: </h5>
+                      <h5>\({{Radio}}\)</h5>
+                      <br>
+                      <h5 >Coeficientes: </h5>
+                      \begin{array}{c}
+                      {% for i in C %}
+                      {{i}}\\
+                      {% endfor %}
+                      \end{array}
+                      <h5 >T:</h5>
+                      <br>
+                      \begin{pmatrix}
+                      {% for v in T %}
+                      {% for p in v %}
+                      {{p}}&
+                      {% endfor %}
+                      \\
+                      {% endfor %}
+                      \end{pmatrix}
+                      <div class="row justify-content-center">
+                         <br>
+                         <table class="table table-striped text-center  col-md-15 table-BusquedasIncrementales">
+                            <thead>
+                               <tr>
+                                  <th>Iteracion</th>
+                                  <th>Error</th>
+                                  <th>X</th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                               <ul>
+                                  {% for key,value in data.items %}
+                                  <tr>
+                                     <th>{{ key}}</th>
+                                     <th>{{ value.0}}</th>
+                                     <th>{{ value.1}}</th>
+                                  </tr>
+                                  {% endfor %}
+                               </ul>
+                            </tbody>
+                         </table>
+                      </div>
+                      {% endif %}
+                   </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}
