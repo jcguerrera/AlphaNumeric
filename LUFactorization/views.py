@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from Metodos.SimpleLU import simpleLU
 from Metodos.PartialLU import partialLU
+from Metodos.doolittle import doolittlee
 # Create your views here.
 
 
@@ -29,3 +30,26 @@ def _simpleLU(request):
             return render(request, "simpleLU.html", {'data': ''})
 
     return render(request, "simpleLU.html",{'data':''})
+
+def doolittle(request):
+    if 'n' in request.POST:
+        n = int(request.POST.get('n'))
+        matrix = []
+        b = []
+        for i in range(n):
+            fila = []
+            b.append(float(request.POST.get('vector'+str(i))))
+            for j in range(n):
+                fila.append(float(request.POST.get('matrix'+str(i)+str(j))))
+            matrix.append(fila)
+        print(matrix)
+        print(b)
+        try:
+            print(2)
+            result = doolittlee(matrix, b, n)
+            print('-------------------')
+            print(result)
+            return render(request, "doolittle.html", {'x': result[0], 'L': result[1], 'U': result[2],'message':result[3]})
+        except:
+            return render(request, "doolittle.html", {'data': ''})
+    return render(request, "doolittle.html",{'data':''})

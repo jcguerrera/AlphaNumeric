@@ -8,3 +8,6 @@ def index(request):
 
 def methods(request):
     return render(request, "methods.html",{'moreno':''})
+
+def about(request):
+    return render(request, "about.html",{'moreno':''})
