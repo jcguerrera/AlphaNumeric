@@ -71,7 +71,7 @@ def _NewtonP(request):
 
         result = divide_dif(x, y)
         print(result[0])
-        return render(request, "dif_Divididas.html", {'Polinomio': result[0], 'D': result[1]})
+        return render(request, "dif_Divididas.html", {'Polinomio': result[0], 'D': result[1],'message':result[2]})
 
     return render(request, "dif_Divididas.html", {'data': ''})
 

@@ -51,14 +51,13 @@
                 <ul>
                     {% if Error%}
                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>This method does not work</strong> You should check in on some fields .
+                        <strong>This method does not work</strong> {{ message  }}
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                         </div>
                   {% endif %}
-                    <h5>Response:</h5>
-                        <label for="">{{message}}</label>
+
                     {% if data %}
 
                     <div class="row justify-content-center">

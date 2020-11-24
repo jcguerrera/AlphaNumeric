@@ -3,11 +3,12 @@ from scipy import linalg as LA
 import pandas as pd
 import copy
 
+
 def sor(A, b, x0, w, tol, Nmax):
     results = {}
     message = ''
     det = np.linalg.det(A)
-    if(det != 0):
+    if det != 0:
         d = np.diag(A)
         D = np.diagflat(d)
         L = -np.tril(A) + D
@@ -28,15 +29,15 @@ def sor(A, b, x0, w, tol, Nmax):
             results[cont] = [float(E), short]
 
         print_iter(results)
-        print('Spectral Radious ', resp)
+        print('Spectral Radius ', resp)
         print('T', T)
         print('C', C)
 
-        return (resp,T,C,results,None)
+        return resp, T, C, results, None
     else:
-        message= 'Error'
+        message = 'Determinant Value = 0, try again with another matrix'
         print(message)
-        return (None,None,None,None,message)
+        return None, None, None, None, message
 
 
 def print_iter(results):
@@ -67,6 +68,3 @@ x = [0, 0, 0, 0]
 
 sor(A, b2, x, 1.5, 0.0000001, 100)
 '''
-
-
-

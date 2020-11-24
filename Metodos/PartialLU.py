@@ -17,10 +17,10 @@ def partialLU(A, b):
             printMatriz(A)
             print('L step', k)
 
-            la = np.around(l,decimals=5)
+            la = np.around(l,decimals=4)
             printMatriz(la)
             dicL[k] = copy.deepcopy(la)
-            ua = np.around(u, decimals=5)
+            ua = np.around(u, decimals=4)
             dicU[k] = copy.deepcopy(ua)
             A, p = searchBiggerandSwap(A, n, k, p)
             for i in range(k + 1, n):
@@ -32,11 +32,11 @@ def partialLU(A, b):
             print('u step', k)
             for i in range(n):
                 u[k][i] = A[k][i]
-            ua = np.around(u,decimals=5)
+            ua = np.around(u,decimals=4)
             printMatriz(ua)
             dicU[k] = copy.deepcopy(ua)
             print('P step', k)
-            pa = np.around(p,decimals=5)
+            pa = np.around(p,decimals=4)
             printMatriz(pa)
             dicP[k] = copy.deepcopy(pa)
 
@@ -45,11 +45,11 @@ def partialLU(A, b):
         z = progSubtitution(lpb)
         uz = concatenateMatrix(u, z)
         x = backSubstitution(uz)
-        x = np.around(x,decimals=5)
+        x = np.around(x,decimals=4)
         print('det', x)
         return (x,dicL,dicU,dicP,None)
     else:
-        message = 'Error'
+        message = 'Determinant Value = 0, try again with another matrix'
         return (None,None,None,None,message)
 
 def searchBiggerandSwap(Ab, n, i, p):
