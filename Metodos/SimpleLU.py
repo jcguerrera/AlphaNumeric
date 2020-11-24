@@ -18,9 +18,9 @@ def simpleLU(A, b):
             printMatriz(A)
             print('L step', k)
             printMatriz(l)
-            la = np.around(l, decimals=5)
+            la = np.around(l, decimals=4)
             dicL[k] = copy.deepcopy(la)
-            ua = np.around(u, decimals=5)
+            ua = np.around(u, decimals=4)
             dicU[k] = copy.deepcopy(ua)
             if (A[k][k] == 0):
                 A = searchAndSwapZero(A, n, k)
@@ -35,7 +35,7 @@ def simpleLU(A, b):
             for i in range(n):
                 u[k][i] = A[k][i]
             printMatriz(u)
-            ua = np.around(u, decimals=5)
+            ua = np.around(u, decimals=4)
             dicU[k] = copy.deepcopy(ua)
 
         print('u', dicU)
@@ -47,7 +47,7 @@ def simpleLU(A, b):
 
         return (x,dicL,dicU,None)
     else:
-        message = 'Error'
+        message = 'Determinant Value = 0, try again with another matrix'
         return (None,None,None, message)
 
 
