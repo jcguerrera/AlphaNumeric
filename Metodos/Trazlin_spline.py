@@ -43,9 +43,8 @@ def traces(x):
             else:
                     result += str(x[i])+" "
     
-    print("\n Traces: \n")
-    for i in result.split(" "):
-        print(i)
+
+    return(result)
         
 
 

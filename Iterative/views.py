@@ -57,9 +57,16 @@ def JacobiP(request):
         d = [1,1,1,1]
         x1 = [0, 0, 0,0]
         '''
-        result = Jacobi(matrix,b,float(t),int(iter),x0)
-        print(result[0])
-   
-        return render(request, "jacobi.html",{'data':result[0],'T':result[1],'C':result[2],'spectralRadius':result[3]})
+        try:
+            result = Jacobi(matrix,b,float(t),int(iter),x0)
+            print(result[0])
+
+            if(result[3]<1):
+                return render(request, "jacobi.html",{'data':result[0],'T':result[1],'C':result[2],'spectralRadius':result[3]})
+            else:
+                return render(request, "jacobi.html",{'message': "The spectral radius must be less than 1.0"})
+        
+        except:
+            return render(request, "jacobi.html",{'message':"You should check in on some of those matrix fields"})
     return render(request, "jacobi.html",{'data':''})
         

@@ -102,9 +102,7 @@ def traces(x):
             j = -1
         j += 1
 
-    print("\n Traces: \n")
-    for i in result.split(" "):
-        print(i)
+    return(result)
 
 def trazcub_spline(x,y,d):
     ''' x = [-1,0,3,4]

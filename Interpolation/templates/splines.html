@@ -1,10 +1,13 @@
 {% extends 'layouts/master.html' %} {% block content %}
 
 <head>
-
+    <meta charset="UTF-8">
+    <title>Splines</title>
     <script type='text/javascript'>
 
         function addFields() {
+                document.getElementById("vector_b").style.display = 'block';
+                document.getElementById("vector_x0").style.display = 'block';
             // Number of inputs to create
             var number = document.getElementById("dimension").value;
             // Container <div> where dynamic content will be placed
@@ -50,52 +53,65 @@
 
 </head>
 <body>
-<div class="container matrix">
-    <div class="row justify-content-center sizeMatrix">
-        <div class="col-md-12">
+<div class="container">
+     <br>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+        <div class="card">
+         <h1> Splines</h1>
             <form method="POST" action="/splines/" class="form">
                 {% csrf_token %}
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label>Dimension de los vectores</label>
-                        <input type="number" id="dimension" min="2" class="form-control" placeholder="Matrix dimension" name="n" step="any" required />
+                        <label>Vectors dimension </label>
+                        <input type="number" id="dimension" min="2" max="100" class="form-control" placeholder="Matrix dimension" name="n" step="any" required />
                     </div>
                 </div>
                                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <button id="filldetails" onclick="addFields()" class="btn btn-primary">Crear</button>
+                    <div class="form-group col-md-12">
+                            <button id="filldetails" onclick="addFields()" class="btn btn-outline-success btn-block">Create</button>
                     </div>
                     </div>
-                                <div id="vector_b" class="text-align metodo">Vector X </div>
+                                <div id="vector_b" class="text-align metodo" style="display:none">Vector X </div>
                 <div id="vector" class="text-align"> </div>
 
-                <div id="vector_x0" class="text-align metodo">Vector Y</div>
+                <div id="vector_x0" class="text-align metodo" style="display:none">Vector Y</div>
                 <div id="vectorx" class="text-align"> </div>
                 <div class="form-row">
                         <div class="form-group col-md-6">
                         <label>Splines</label>
                         <select name="method_type_splines" class="form-control">
-                            <option value="lin">Lineal</option> 
-                            <option value="cuad">Cuadrático</option>
-                            <option value="cub">Cúbico</option>
+                            <option value="lin">Linear</option> 
+                            <option value="cuad">Quadratic</option>
+                            <option value="cub">Cubic</option>
                         </select>
                     </div>
                 </div>
                 <div class="form-row">
                      <div class="form-group col-md-6">
-                        <label> Tipos de Gaussian Elimination</label>
+                        <label> Gaussian Elimination Types</label>
                         <select name="method_type_gauss" class="form-control">
                             <option value="S">Simple</option> 
-                            <option value="P">Parcial</option>
+                            <option value="P">Partial</option>
                             <option value="T">Total</option>
                         </select>
                    </div>
                 </div> 
 
+        
+                    {% if message%}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>This method does not work.</strong>  
+                                {{message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                             {% endif %}
 
                 <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <button id="solve" type="submit" class="btn btn-success">Calcular</button>
+                    <div class="form-group col-md-12">
+                        <button id="solve" type="submit"  class="btn btn-outline-success btn-block">Calculate</button>
                     </div>
 
                 </div>
@@ -108,13 +124,37 @@
 <ul>
     {% if steps %}
     <h5>A:</h5>
-    <h5>{{A}}</h5>
+    <h5>                
+     \begin{bmatrix}
+    {% for v in A %}
+    {% for p in v %}
+    {{p}}&
+    {% endfor %}
+    \\
+    {% endfor %}
+    \end{bmatrix}</h5>
     <h5>b:</h5>
-    <h5>{{b}}</h5>
+    <h5>      
+     \begin{bmatrix}
+    {% for p in b %}
+    {{p}}\\
+    {% endfor %}
+    \end{bmatrix}</h5>
     <h5>Trazas:</h5>
-    <h5>{{trazas}}</h5>
-    <h5>X:</h5>
-    <h5>{{x}}</h5>
+    {% for p in traces %}
+                 <pre><strong> {{p}}</strong> </pre> 
+    {% endfor %}
+  
+    <h5>X:
+    </h5>
+    <h5>       
+    \begin{bmatrix}
+    {% for p in x %}
+    {{p}}\\
+    {% endfor %}
+    \end{bmatrix}
+    </h5>
+    
     <div class="row justify-content-center">
         <table class="table table-striped text-center table-BusquedasIncrementales">
             <thead>
@@ -125,20 +165,39 @@
             </thead>
             <tbody>
                 <ul>
+                    <!--
                     {% for key, value in steps.items %}
                     <tr>
                         <th>{{ key }}</th>
                         <th>
                             {% for v in value %}
-                                <p>{{ v }}</p> 
+                                <p>{{ v }}</p> \\
                             {% endfor %}
                         </th>
                     </tr>
                     {% endfor %}
-
+                    -->
+                    
+                    {% for key, value in steps.items %}
+                    <tr>
+                        <th>{{ key }}</th>
+                        <th>
+                            \begin{bmatrix}
+                            {% for v in value %}
+                                {% for p in v %}
+                                    {{p}}&
+                                {% endfor %}
+                                \\
+                            {% endfor %}
+                            \end{bmatrix}
+                        </th>
+                    </tr>
+                    {% endfor %}
                 </ul>
             </tbody>
         </table>
+    </div>
+    </div>
     </div>
     {% endif %}
 </ul>

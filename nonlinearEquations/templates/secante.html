@@ -1,71 +1,103 @@
 {% extends 'layouts/master.html' %} {% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <title>Secant</title>
+
+</head>
+
 <div class="contenedor">
     <br>
     <div class="row justify-content-center">
 
         <div class="col-md-8">
             <div class="card">
-                <h1>SECANTE</h1>
-                <form method="POST" action="/secante/">
+                <h1>Secant</h1>
+                <form id="form" method="POST" action="/secante/" class="form">
                     {% csrf_token %}
-                    <label for="fname">X0:</label><br>
-                    <input type="text" id="x0" name="x0"><br>
-                    <label for="lname">X1:</label><br>
-                    <input type="text" id="x1" name="x1"><br><br>
-                    <label for="fname">Iteraciones:</label><br>
-                    <input type="text" id="i" name="i"><br>
-                    <label for="lname">Tolerancia:</label><br>
-                    <input type="text" id="t" name="t"><br><br>
-                    <label for="lname">Funcion:</label><br>
-                    <input type="text" id="f" name="f"><br><br>
-                    <input type="submit" value="Submit">
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="eq">Function</label>
+                            <input id="eq" type="text" value="" class="form-control" placeholder="" name="f" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>x0</label>
+                            <input type="number" class="form-control" placeholder="" name="x0" max="100000.0" step="any" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>x1</label>
+                            <input type="number" class="form-control" placeholder="" name="x1"  max="100000.0" step="any" required />
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>Number Iterations</label>
+                            <input type="number" class="form-control" placeholder="" max="10000" name="i" step="any" required />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Tolerance</label>
+                            <input type="number" class="form-control" placeholder="" max="100.0"name="t" step="any" required />
+                        </div>
+                        
+                    {% if message%}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>This method does not work.</strong>  
+                                {{message}}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                             {% endif %}
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <button type="submit" class="btn btn-outline-success btn-block">Calculate</button>
+                            <button type="submit" value="Draw" onclick="draw()"    class="btn btn-outline-success btn-block">Graph</button>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                            <label id="graph" style="display:none">Graph</label>
+                        </div>
                 </form>
-                 <div class="form-group col-md-12" id="plot"></div>
+        
                 <ul>
-                    {% if  data  %}
-                        <div class="form-group col-md-6" >
-                            <a button type="submit" href="/grafica" class="btn btn-primary mb-2">Generar Grafico</a>
-                        </div>
+                    {% if data %}
+                    <div class="row justify-content-center">
+                        <table class="table table-striped text-center table-BusquedasIncrementales">
 
-              
-                <h5 >Respuesta: </h5>
-                <h5>{{add}}</h5><br>
-                <div class="row justify-content-center">
+                <h5 >Reply:</h5>
+                <pre>
+                <h5> {{add}}</h5></pre><br>
+                            <thead>
+                                <tr>
+                                    <th>Iteration</th>
+                                    <th>Xi</th>
+                                    <th>f(xi)</th>
+                                    <th>Error</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <ul>
+                                    {% for key,value in data.items %}
 
-
-                        <div class="row justify-content-center">
-                                <table class="table table-striped text-center table-BusquedasIncrementales">
-                                    <thead>
-                                        <tr>
-                                            <th>Iteracion</th>
-                                            <th>Xi</th>
-                                            <th>f(xi)</th>
-                                            <th>Error</th>
-
-
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                         <ul>
-                                            {% for key,value in data.items %}
-                                                <tr>
-                                                    <th>{{ key}}</th>
-                                                    <th>{{ value.0}}</th>
-                                                    <th>{{ value.1}}</th>
-                                                    <th>{{ value.2}}</th>
-                                                </tr>
-                                            {% endfor %}
-                                         </ul>
-                                    </tbody>
-                                </table>
-                        </div>
+                                    <tr>
+                                        <th>{{ key}}</th>
+                                        <th>{{ value.0}}</th>
+                                        <th>{{ value.1}}</th>
+                                        <th>{{ value.2}}</th>
+    
+                                    </tr>
+                                    {% endfor %}
+                                </ul>
+                            </tbody>
+                        </table>
+                    </div>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </div>
 </div>
-
-
-
 {% endblock %}

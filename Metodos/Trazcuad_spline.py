@@ -68,11 +68,8 @@ def traces(x):
                 result += str(x[i])+" "
             j = -1
         j += 1
-    #("\n Traces: \n")
-    traces =""
-    for i in result.split(" "):
-        traces+= str(i)+ "\n"
-    return(traces)
+
+    return(result)
     
 
 def trazcuad_spline(x,y,d):
