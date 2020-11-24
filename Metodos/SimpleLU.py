@@ -18,8 +18,10 @@ def simpleLU(A, b):
             printMatriz(A)
             print('L step', k)
             printMatriz(l)
-            dicL[k] = copy.deepcopy(l)
-            dicU[k] = copy.deepcopy(u)
+            la = np.around(l, decimals=5)
+            dicL[k] = copy.deepcopy(la)
+            ua = np.around(u, decimals=5)
+            dicU[k] = copy.deepcopy(ua)
             if (A[k][k] == 0):
                 A = searchAndSwapZero(A, n, k)
             for i in range(k + 1, n):
@@ -33,7 +35,8 @@ def simpleLU(A, b):
             for i in range(n):
                 u[k][i] = A[k][i]
             printMatriz(u)
-            dicU[k] = copy.deepcopy(u)
+            ua = np.around(u, decimals=5)
+            dicU[k] = copy.deepcopy(ua)
 
         print('u', dicU)
         lb = concatenateMatrix(l, b)
@@ -42,10 +45,10 @@ def simpleLU(A, b):
         x = backSubstitution(uz)
         print('x ', x)
 
-        return (x,dicL,dicU,message)
+        return (x,dicL,dicU,None)
     else:
         message = 'Error'
-        return ('', '', '', message)
+        return (None,None,None, message)
 
 
 

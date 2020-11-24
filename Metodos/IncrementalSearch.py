@@ -5,9 +5,13 @@ import pandas as pd
 
 def incremental_search(funcion,xi, delta, nIter):
     results = {}
+    response = ''
+    message = ''
     if delta <= 0:
-        print("El delta debe ser positivo")
-        sys.exit(1)
+        print("Delta must be a positive value")
+        response = "Delta must be a positive value"
+        message = 'Error'
+        return None,response,message
     elif nIter > 0:
 
         x = sm.symbols('x')
@@ -24,14 +28,14 @@ def incremental_search(funcion,xi, delta, nIter):
             f_a = currentF
             currentF = sm.sympify(funcion).subs(x,current_X)
             contador = contador + 1
-
-        return results
+        response = "Succesful output"
+        return results, response,None
 
     else:
-        print("Las iteraciones deben ser un numero positivo")
-        results['message'] = 'Error'
+        response='Iteration number is not positive'
+        message = 'Error'
         print('el intervalo no sirve')
-        return results
+        return None, response,message
 
 def print_function(results):
     index = []

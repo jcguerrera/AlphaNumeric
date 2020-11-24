@@ -8,15 +8,20 @@ import pandas as pd
 
 def bisection(funcion, xi, xs, nIter, iter):
     results = {}
+    response = ''
+    message = ''
     if nIter > 0:
         x = sm.symbols('x')
         fxi = sm.sympify(funcion).subs(x, xi)
         fxs = sm.sympify(funcion).subs(x, xs)
-        sm.plot(funcion)
         if (fxi == 0):
             print(fxi)
+            response= 'xi is a root'
+            return None,response,None
         elif (fxs == 0):
             print(fxs)
+            response = 'xs is a root'
+            return None, response, None
         elif (fxs * fxi < 0):
             xm = (xi + xs) / 2
             fxm = sm.sympify(funcion).subs(x, xm)
@@ -35,11 +40,12 @@ def bisection(funcion, xi, xs, nIter, iter):
                 count += 1
                 results[count] = [float(xi), float(xm), float(xs), float(fxm), float(error)]
             print(results)
-        return results
+        response = 'Succesful output'
+        return results,response ,None
     else:
-        results['message'] = 'Error'
-        print('el intervalo no sirve')
-        return results
+        response='Iteration number is not positive'
+        message = 'Error'
+        return (None,response,message)
 
 
 #print(bisection('ln((sin(x)^2)+1)-(1/2)',0,1,100,0.0000001))

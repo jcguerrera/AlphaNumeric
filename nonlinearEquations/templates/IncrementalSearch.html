@@ -11,13 +11,13 @@
 
         <div class="col-md-8">
             <div class="card">
-                <h1>Busquedas Incrementales</h1>
+                <h1>Incremental Searches</h1>
                 <form method="POST" action="/busquedas/" class="form">
                     {% csrf_token %}
 
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="eq">Funcion</label>
+                            <label for="eq">Function</label>
                             <input id="eq" type="text" value="4 * sin(x) + 5 * cos(x/2)" class="form-control" placeholder="" name="f_function" required />
                         </div>
                         <div class="form-group col-md-6">
@@ -31,24 +31,33 @@
                             <input type="number" class="form-control" placeholder="" name="delta" step="any" required />
                         </div>
                         <div class="form-group col-md-6">
-                            <label>Numero de Iteraciones</label>
+                            <label>Iteration Quantity</label>
                             <input type="number" class="form-control" placeholder="" name="nIter" step="any"  required />
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
-                            <button type="submit" class="btn btn-outline-success btn-block">Calcular</button>
-                            <button type="submit" value="Draw" onclick="draw()" class="btn btn-outline-success btn-block">Graficar</button>
+                            <button type="submit" class="btn btn-outline-success btn-block">Solve</button>
+                            <button type="submit" value="Draw" onclick="draw()" class="btn btn-outline-success btn-block">Graph</button>
                         </div>
 
                     </div>
                 </form>
                 <div class="form-group col-md-12" id="plot"></div>
                 <ul>
-                    {% if  data  %}
-                        <div class="form-group col-md-6" >
-                            <a button type="submit" href="/grafica" class="btn btn-primary mb-2">Generar Grafico</a>
+                 <ul>
+                    {% if Error%}
+                       <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>This method does not work</strong> You should check in on some fields.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
                         </div>
+                  {% endif %}
+                    <h5>Response:</h5>
+                        <label for="">{{message}}</label>
+                    {% if  data  %}
+
                         <div class="row justify-content-center">
                                 <table class="table table-striped text-center table-BusquedasIncrementales">
                                     <thead>
