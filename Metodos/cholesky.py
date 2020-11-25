@@ -1,7 +1,7 @@
 import numpy as np
 import math
 
-def cholesky(A, b):
+def choleskyy(A, b):
     #Inicialización
     n = len(A)
     L = np.eye(n)
