@@ -130,7 +130,7 @@ def newton(request):
 
         except: 
             print(2)
-            return render(request, "newton.html", {'data': ''})
+            return render(request, "newton.html", {'data': '', 'message': 'Error in given data'})
     return render(request, "newton.html",{'data':''})
 
 

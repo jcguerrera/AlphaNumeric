@@ -98,19 +98,17 @@ def splinesP(request):
 
         result = ()
 
-        try:
-            print(method_splines)
-            print(method_gauss)
-            if method_splines == 'cuad':
-                result = trazcuad_spline(x,y,method_gauss)
-            elif method_splines == 'lin':
-                result = trazlin_spline(x,y,method_gauss)
-            elif method_splines == 'cub':
-                result = trazcub_spline(x,y,method_gauss)
+        print(method_splines)
+        print(method_gauss)
+        if method_splines == 'cuad':
+            result = trazcuad_spline(x,y,method_gauss)
+        elif method_splines == 'lin':
+            result = trazlin_spline(x,y,method_gauss)
+        elif method_splines == 'cub':
+            result = trazcub_spline(x,y,method_gauss)
 
+        if result[0] != None:
             traces=result[0].split(" ")
-            return render(request, "splines.html",{'traces':traces,'steps':result[3],'A':result[1],'b':result[2],'x':result[4]})
-   
-        except:
-             return render(request, "splines.html",{'message':"You should check in on some of those matrix fields"})
+        return render(request, "splines.html",{'traces':traces,'steps':result[3],'A':result[1],'b':result[2],'x':result[4], 'message':result[5]})
+
     return render(request, "splines.html",{'data':''})   

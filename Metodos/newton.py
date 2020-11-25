@@ -35,6 +35,7 @@ def newtonn(function, x0, iter, tol):
     else:
         message = ("Fail in iteration: " + str(iter))
     
+    print(results)
     return results, message
 
 
