@@ -23,8 +23,9 @@ def lagrangeP(request):
             if(x[i]<x[i-1]):
                 return render(request, "lagrange.html", {'message': 'Insert Vector X\'s data in a incremental order'})
             for j in range(1,len(x)):
-                if(x[i]==x[j]):
-                    return render(request, "lagrange.html", {'message': 'Error: There are equal values of x'})
+                if(i!=j):
+                    if(x[i]==x[j]):
+                        return render(request, "lagrange.html", {'message': 'Error: There are equal values of x'})
         try:
             data = lagrange(x, y)
         except:
@@ -45,8 +46,9 @@ def vandermondeP(request):
             if(x[i]<x[i-1]):
                 return render(request, "vandermonde.html", {'message': 'Insert Vector X\'s data in a incremental order'})
             for j in range(1,len(x)):
-                if(x[i]==x[j]):
-                    return render(request, "vandermonde.html", {'message': 'Error: There are equal values of x'})
+                if(i!=j):
+                    if(x[i]==x[j]):
+                        return render(request, "vandermonde.html", {'message': 'Error: There are equal values of x'})
         try:
             data = vandermonde(x, y)
         except:
