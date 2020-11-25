@@ -27,15 +27,15 @@ def newtonn(function, x0, iter, tol):
         cont += 1
 
     if fx == 0:
-        results['message'] = ("X0: " + str(x0) + " is root")
+        message = ("X0: " + str(x0) + " is root")
     elif error < tol:
-        results['message'] = ("X0: " + str(x0) + " approximate root with tolerance: " + str(tol))
+        message = ("X0: " + str(x0) + " approximate root with tolerance: " + str(tol))
     elif dFx == 0:
-        results['message'] = ("X0: " +  str(x0) + " is probably a multiple root")
+        message = ("X0: " +  str(x0) + " is probably a multiple root")
     else:
-        results['message'] = ("Fail in iteration: " + str(iter))
+        message = ("Fail in iteration: " + str(iter))
     
-    return results
+    return results, message
 
 
 def draw():
