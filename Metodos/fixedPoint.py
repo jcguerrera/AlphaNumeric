@@ -29,12 +29,12 @@ def fixedPointt(function1, function2, xa, iter, tol):
         cont += 1
     
     if fx == 0:
-        results['message'] = ("Xa: " + str(xa) + " is a root")
+        message = ("Xa: " + str(xa) + " is a root")
     elif error < tol :
-        results['message'] = ("Xa: " + str(xa) + " approximate root with tolerance: " + str(tol))
+        message = ("Xa: " + str(xa) + " approximate root with tolerance: " + str(tol))
     else:
-        results['message'] = ("Fail in iteration: " + str(iter))
+        message = ("Fail in iteration: " + str(iter))
     
-    return results
+    return results, message
 
 #print(fixedPointt('x**3 + 4 * x**2 - 10', '(10/(x+4))^(1.0/2)', float(1.5), 11, float(0.000000005)))

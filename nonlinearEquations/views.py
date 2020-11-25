@@ -125,8 +125,8 @@ def newton(request):
 
         try:
             
-            data = newtonn(str(function), float(x0), int(i), float(tol))
-            return render(request, "newton.html", {'data': data, 'message' : data['message']})
+            data,message = newtonn(str(function), float(x0), int(i), float(tol))
+            return render(request, "newton.html", {'data': data, 'message' : message})
 
         except: 
             print(2)
@@ -147,9 +147,9 @@ def fixedPoint(request):
 
         try:
             print(1)
-            data = fixedPointt(str(function1), str(function2), float(xa), int(i), float(tol))
+            data,message = fixedPointt(str(function1), str(function2), float(xa), int(i), float(tol))
             print(data)
-            return render(request, "fixedPoint.html", {'data': data, 'message' : data['message']})
+            return render(request, "fixedPoint.html", {'data': data, 'message' : message})
 
         except: 
             print(2)
