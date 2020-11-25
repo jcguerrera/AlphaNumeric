@@ -30,7 +30,7 @@ def bisectionP(request):
 
             return render(request, "bisection.html", {'data': data,'message':noti,'Error':message})
         except:
-            return render(request, "bisection.html", {'data': ''})
+            return render(request, "bisection.html", {'message':'algo'})
     return render(request, "bisection.html", {'data': ''})
 
 

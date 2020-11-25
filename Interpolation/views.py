@@ -75,11 +75,12 @@ def _NewtonP(request):
             y.append(float(request.POST.get('vectorx' + str(i))))
 
         print(x)
-
-        result = divide_dif(x, y)
-        print(result[0])
-        return render(request, "dif_Divididas.html", {'Polinomio': result[0], 'D': result[1],'message':result[2]})
-
+        try:
+            result = divide_dif(x, y)
+            print(result[0])
+            return render(request, "dif_Divididas.html", {'Polinomio': result[0], 'D': result[1],'message':result[2]})
+        except:
+            return render(request, "dif_Divididas.html", {'data': ''})
     return render(request, "dif_Divididas.html", {'data': ''})
 
 def splinesP(request):
