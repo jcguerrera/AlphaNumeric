@@ -54,4 +54,5 @@ urlpatterns = [
     path('doolittle/',LU_Factorization.doolittle, name ='doolittle'),
     path('crout/',LU_Factorization.crout, name ='crout'),
     path('cholesky/',LU_Factorization.cholesky, name ='cholesky'),
+    path('gausSeidel/',Iteratives_views.gausSeidel, name ='gausSeidel'),
 ]
