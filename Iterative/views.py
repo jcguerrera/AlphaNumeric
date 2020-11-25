@@ -2,7 +2,10 @@ from django.shortcuts import render
 from Metodos.SOR import sor
 from Iterative import templates
 from Metodos.Jacobi import Jacobi
+from Metodos.gaussSeidel import gaussSeidell
+
 # Create your views here.
+
 def _sor(request):
     if 'n' in request.POST:
         n = int(request.POST.get('n'))
@@ -69,4 +72,28 @@ def JacobiP(request):
         except:
             return render(request, "jacobi.html",{'message':"You should check in on some of those matrix fields"})
     return render(request, "jacobi.html",{'data':''})
-        
+
+
+def gausSeidel(request):
+    if 'n' in request.POST:
+        n = int(request.POST.get('n'))
+        nIter = request.POST.get('nIter')
+        tol = request.POST.get('tol')
+        matrix = []
+        b = []
+        x0 = []
+        for i in range(n):
+            fila = []
+            b.append(float(request.POST.get('vector'+str(i))))
+            x0.append(float(request.POST.get('vectorx' + str(i))))
+            for j in range(n):
+                fila.append(float(request.POST.get('matrix'+str(i)+str(j))))
+            matrix.append(fila)
+        print(x0)
+        try:
+            result = gaussSeidell(matrix, b, float(tol), float(nIter),  x0)
+            print(result[4])
+            return render(request, "gausSeidel.html", {'Radio': result[0], 'T': result[1], 'C': result[2],'data': result[3],'message': result[4]})
+        except:
+            return render(request, "gausSeidel.html", {'data': ''})
+    return render(request, "gausSeidel.html",{'data':''})
