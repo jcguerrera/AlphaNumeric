@@ -1,10 +1,15 @@
 import numpy as np
+import copy
 
-def Crout(a, b):
+def croutt(a, b):
+    message = ''
+    dicL = {}
+    dicU = {}
     cout = 0
     m, n = a.shape
     if (m !=n ):
-        print("Crout cannot be used.")#Ensure that the number of equations is equal to the number of unknowns
+        message = ("Crout cannot be used.")#Ensure that the number of equations is equal to the number of unknowns
+        return (None,None,None, message)
     else:
         l = np.zeros((n,n))
         u = np.zeros((n,n))
@@ -13,6 +18,10 @@ def Crout(a, b):
 
         for m in range(1,n+1):
             print("Stage " + str(m) + ": ")
+            la = np.around(l, decimals=4)
+            dicL[m] = copy.deepcopy(la)
+            ua = np.around(u, decimals=4)
+            dicU[m] = copy.deepcopy(ua)
             for i in range(n):
                 l[i][0] = a[i][0]
                 u[i][i] = 1
@@ -27,6 +36,10 @@ def Crout(a, b):
                     for r in range(k): s2 += l[k][r] * u[r][j]
                     u[k][j] = (a[k][j] - s2) / l[k][k]
                     s2 = 0                #Initialize s2 after each summation=0
+                la = np.around(l, decimals=4)
+                dicL[m] = copy.deepcopy(la)
+                ua = np.around(u, decimals=4)
+                dicU[m] = copy.deepcopy(ua)
             print("U: ")
             print(u)
             print("L: ")
@@ -54,6 +67,9 @@ def Crout(a, b):
         for i in range(n):
             print("x" + str(i + 1) + " = ", x[i])
 
+        return (x,dicL,dicU,None)
+
+
 
 
 #if __name__ == '__main__':            #When the module is run directly, the following code blocks will be run. When the module is imported, the code blocks will not be run.
@@ -63,6 +79,6 @@ def Crout(a, b):
 #                [14, 5, -2, 30]
 #                ])
 #    b = np.array([1,1,1,1])
-#    Crout(a, b)
+#    croutt(a, b)
 
 
