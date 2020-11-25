@@ -1,0 +1,26 @@
+leer x,y:
+
+    n = longitud(x)
+    D = matriz de 0
+
+    D[:,0] = y->traspuesta
+
+    para i hasta n:
+        aux0 = D[i-1:n,i-1]
+        aux1 = diferenciaAdyacente(aux0)
+        aux2 = restaVectorial(x[i:n],x[0:n-1-i+1])
+        D[i:n,i] = DivisionVectorial(aux1,traspuesta(aux2))
+    fin
+
+    res = diagonal(D)
+
+    r = res[0]
+    m = '(x' + (-x[0]) + ')'
+    para i hasta n:
+        r += res[i] + m
+        m += '(x' + -x[i] + ')'
+    fin
+    escribir('Matrix D: \n',D)
+    escribir('Coef: ',res)
+    escribir('Newton Polinom : ', r)
+fin

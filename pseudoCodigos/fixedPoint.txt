@@ -1,0 +1,21 @@
+read xa, tol, iter
+
+y = f(xa)
+cont = 0
+error = tol + 1
+
+while(y != 0 & error > tol & cont < iter)
+    xn = g(xa)
+    y = f(xn)
+    error = abs(xn - xa)
+    xa = xn
+    cont += 1
+end while
+
+if (y == 0)
+    write "xa is root"
+else if (error < tol)
+    write "xa approximate root with tolerance: tol)"
+else
+    write "Fail in iteration: iter"
+end if

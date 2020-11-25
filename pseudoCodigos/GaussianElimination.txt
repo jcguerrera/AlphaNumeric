@@ -1,0 +1,41 @@
+simpleGaussianElimination
+read  a, b
+AB = concatenar(a, b)
+n = len(AB)
+while k < n do
+    write step k
+    write AB
+    if AB[k][k] == 0
+    AB = searchAndSwapZero(Ab, n, k)
+    while i = k+1 < n do
+        mult = Ab[i][k]/Ab[k][k]
+        while j = k < n+1 do
+            Ab[i][j] = Ab[i][j] - mult*Ab[k][j]
+
+
+partialGaussianElimination
+read  a, b
+AB = concatenar(a, b)
+n = len(AB)
+while k < n do
+    write step k
+    write AB
+    AB = searchBiggerandSwap(Ab, n, k)
+    while i = k+1 < n do
+        mult = Ab[i][k]/Ab[k][k]
+        while j = k < n+1 do
+            Ab[i][j] = Ab[i][j] - mult*Ab[k][j]
+
+
+totalGaussianElimination
+read  a, b
+AB = concatenar(a, b)
+n = len(AB)
+while k < n do
+    write step k
+    write AB
+    Ab, order = searchTheBiggestandSwap(Ab, n, k, order)
+    while i = k+1 < n do
+        mult = Ab[i][k]/Ab[k][k]
+        while j = k < n+1 do
+            Ab[i][j] = Ab[i][j] - mult*Ab[k][j]

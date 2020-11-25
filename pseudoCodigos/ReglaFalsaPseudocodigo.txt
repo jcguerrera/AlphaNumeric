@@ -1,0 +1,35 @@
+read a, b, funcion, limite_iteraciones, tolerancia
+
+fa = f(a)
+fb = fb
+
+if fa == 0 then
+    print a es raiz
+else if fb == 0 then
+    print b es raiz
+else if fa * fb < 0 then
+    error = 1
+    cont = 1
+    c = (fb*a - fa*b)/(fb - fa)
+    fc = f(c)
+
+    while fc !=0 and cont < limite_iteraciones and error > tolerancia do
+        if fa * fc < 0 then
+            b = c
+            fb = f(c)
+        else 
+            a = c
+            fa = f(c)
+        caux = c  
+        c = (fb*a - fa*b)/(fb - fa)
+        fc = f(c)
+        error = |caux - c|
+        cont+=1
+        if fc == 0 then
+            print c es una raiz
+        else if error < tolerancia then
+            print c es una aproximación de la raiz
+        else 
+            print número de iteraciones máximas alcanzado, no se alcanzó la convergencia
+else 
+    print intervalo inadecuado, no cumple con el teorema fa * fb < 0        

@@ -3,7 +3,6 @@ import numpy as np
 
 
 def gaussSeidell(A, b, t, iter, x0):
-    print('hola')
     results = {}
     message = ''
     n = len(A)
@@ -50,8 +49,10 @@ def gaussSeidell(A, b, t, iter, x0):
             print(C)
             values, normalized_eigenvectors = np.linalg.eig(T)  # T es la matriz
             spectral_radius = max(abs(values))
+            if spectral_radius > 1:
+                message = ("The method does not converge.")
+                return None, None, None, None, message
             print("\nSpectral Radius: ", spectral_radius)
-            print('------------------------------------------------')
             return spectral_radius, T, C, results, None
         else:
             message = "Can not find a solution in ", iter, " iterations"

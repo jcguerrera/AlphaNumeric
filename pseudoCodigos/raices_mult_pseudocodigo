@@ -1,0 +1,30 @@
+read tol, x0, nIteration, function1, function2, function3
+fx = function1 (x0)
+dfx = function2 (x0)
+d2fx = function3 (x0)
+
+counter = 0
+error = tol + 1
+den = (dfx ^ 2) - (fx * d2fx)
+while (error> tol and fx <> 0 and den <> 0 counter <nIteration)
+    
+     x1 = x0 - ((fx * dfx) / den)
+     fx = function1 (x1)
+     dfx = function2 (x1)
+     d2fx = function3 (x1)
+     den = (dfx ^ 2) - (fx * d2fx)
+
+     error = abs (x1-x0)
+     x0 = x1
+     counter = counter + 1
+end while
+
+if (fx == 0)
+     x0 "is a root"
+else if (error <tol)
+     x1 "was found as an approximation to a root with a tolerance of =" tol
+else if (den == 0)
+     "it is an indeterminacy"
+else
+     "method failed in" nIteraccion "iterations"
+end if

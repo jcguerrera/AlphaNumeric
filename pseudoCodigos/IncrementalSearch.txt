@@ -1,0 +1,36 @@
+read x_inicial, delta, limite_Iteraciones, funcion:
+
+    if delta <= 0:
+
+        write "El delta debe ser positivo"
+
+        sys.exit(1)
+
+    elif limite_Iteraciones > 0:
+    
+        x_anterior = x_inicial
+        x_actual = x_anterior+delta
+        f_anterior = f(x_anterior)
+        f_actual = F(x_actual)
+        contador = 0
+        while (contador < limite_Iteraciones):
+            if f_actual*f_anterior<0:
+                resultados[contador] <- [x_anterior,x_actual]
+            x_anterior = x_actual
+            x_actual = x_actual + delta
+            f_anterior = f_actual
+            f_actual = f(x_actual)
+            contador = contador + 1
+
+        endwhile:
+
+        devolver resultados
+
+        write(aux)
+    endif:
+    else:
+        write "Las iteraciones deben ser un numero positivo"
+        sys.exit(1)
+    end else:
+
+end

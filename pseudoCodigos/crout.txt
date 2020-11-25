@@ -1,0 +1,35 @@
+read A, b
+  n = lenght A
+  L,U = Iniciar LU(n)
+  for k=0 hasta n
+    U(k,k)=1;
+    for i=k hasta n
+        suma1 = 0
+        for p=0 hasta k
+        suma1=suma1+L(k,p)*U(p,k);
+
+    end for
+    U(k,j)=A(k,j) - suma1;
+
+    for j=k+1 hasta n
+        suma2= 0;
+        for p = 0 hasta k
+            suma2= suma2+ L(k,p)*U(p,j);
+        end for
+        U(k,j) = (A(k,j)-suma2)/L(k,k);
+    end for
+  end for
+  
+  detA = 1;
+  for i=1 hasta n
+    detA = detA*L(i,i)
+  end for 
+  
+  if (detA ≠ 0 then)
+    z = sustituir(L,b)
+    x = sustituir(U,z)
+  else
+    return "Hay infinitas soluciones o no tiene solución"
+  end if
+
+  return L,U
