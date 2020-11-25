@@ -14,51 +14,57 @@ def doolittlee(A,b,size):
     l = lmatrix(n)
     dicL = {}
     dicU = {}
-    A = np.array(A)
-    b = np.array(b)
-    L = np.eye(size)
-    U = np.eye(size)
-    print("Etapa 0:")
-    print("Matriz L: ")
-    print(L)
-    print("Matriz U: ")
-    print(U)
-    for i in range(size):
-
-        print("Etapa " + str(i+1))
-        la = np.around(l, decimals=4)
-        dicL[i] = copy.deepcopy(la)
-        ua = np.around(u, decimals=4)
-        dicU[i] = copy.deepcopy(ua)
-
-        for k in range(i, size): 
-            suma = 0;
-            for j in range(i):
-                suma += (L[i][j] * U[j][k]);
-            U[i][k] = A[i][k] - suma;
-
-        for k in range(i, size):
-            if (i == k):
-                L[i][i] = 1;
-            else:
-                suma = 0;
-                for j in range(i):
-                    suma += (L[k][j] * U[j][i]);
-                L[k][i] = ((A[k][i] - suma)/U[i][i]);
-        la = np.around(L, decimals=4)
-        dicL[i] = copy.deepcopy(la)
-        ua = np.around(U, decimals=4)
-        dicU[i] = copy.deepcopy(ua)
-
+    det = np.linalg.det(A)
+    if det != 0:
+        A = np.array(A)
+        b = np.array(b)
+        L = np.eye(size)
+        U = np.eye(size)
+        print("Etapa 0:")
         print("Matriz L: ")
         print(L)
         print("Matriz U: ")
         print(U)
-    z = frontSubstitution(L, b)
-    x = backSubstitution(U, z)
-    printResultVector(x)
-    print('------------------------')
-    return (x,dicL,dicU,None)
+        for i in range(size):
+
+            print("Etapa " + str(i+1))
+            la = np.around(l, decimals=4)
+            dicL[i] = copy.deepcopy(la)
+            ua = np.around(u, decimals=4)
+            dicU[i] = copy.deepcopy(ua)
+
+            for k in range(i, size): 
+                suma = 0;
+                for j in range(i):
+                    suma += (L[i][j] * U[j][k]);
+                U[i][k] = A[i][k] - suma;
+
+            for k in range(i, size):
+                if (i == k):
+                    L[i][i] = 1;
+                else:
+                    suma = 0;
+                    for j in range(i):
+                        suma += (L[k][j] * U[j][i]);
+                    L[k][i] = ((A[k][i] - suma)/U[i][i]);
+            la = np.around(L, decimals=4)
+            dicL[i] = copy.deepcopy(la)
+            ua = np.around(U, decimals=4)
+            dicU[i] = copy.deepcopy(ua)
+
+            print("Matriz L: ")
+            print(L)
+            print("Matriz U: ")
+            print(U)
+        z = frontSubstitution(L, b)
+        x = backSubstitution(U, z)
+        printResultVector(x)
+        print('------------------------')
+        return (x,dicL,dicU,None)
+    else:
+        message = 'Determinant Value = 0, try again with another matrix'
+        print(message)
+        return None, None, None, message
 
 def frontSubstitution(A, b):
     n = len(A)

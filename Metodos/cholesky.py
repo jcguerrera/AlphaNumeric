@@ -14,55 +14,59 @@ def choleskyy(A, b):
     message = ''
     dicL = {}
     dicU = {}
+    det = np.linalg.det(A)
+    if det != 0:
+        #factorization
+        for i in range(n-1):
+            la = np.around(L, decimals=4)
+            dicL[i] = copy.deepcopy(la)
+            ua = np.around(U, decimals=4)
+            dicU[i] = copy.deepcopy(ua)
+            suma = 0
+            for j in range(i):
+                suma += (L[i][j] * U[j][i])
+            L[i][i] = math.sqrt(A[i][i] - suma)
+            U[i][i] = L[i][i]
 
-    #factorization
-    for i in range(n-1):
+            for k in range(i+1,n):
+                suma = 0
+                for j in range(i):
+                    suma += (L[k][j] * U[j][i])
+                L[k][i] = (A[k][i] - suma) / U[i][i]
+
+            for k in range(i+1,n):
+                suma = 0
+                for j in range(i):
+                    suma += (L[i][j] * U[j][k])
+                U[i][k] = (A[i][k] - suma) / L[i][i]
+
+        suma = 0
+        for j in range(n-1):
+            suma += (L[n-1][j] * U[j][n-1])
+        L[n-1][n-1] = math.sqrt(A[n-1][n-1] - suma)
+        U[n-1][n-1] = L[n-1][n-1]
+
         la = np.around(L, decimals=4)
         dicL[i] = copy.deepcopy(la)
         ua = np.around(U, decimals=4)
         dicU[i] = copy.deepcopy(ua)
-        suma = 0
-        for j in range(i):
-            suma += (L[i][j] * U[j][i])
-        L[i][i] = math.sqrt(A[i][i] - suma)
-        U[i][i] = L[i][i]
 
-        for k in range(i+1,n):
-            suma = 0
-            for j in range(i):
-                suma += (L[k][j] * U[j][i])
-            L[k][i] = (A[k][i] - suma) / U[i][i]
+        print("Matriz L")
+        print(L)
+        print("Matriz U")
+        print(U)
+        z = frontSubstitution(L, b)
+        x = backSubstitution(U, z)
+        print(x)
 
-        for k in range(i+1,n):
-            suma = 0
-            for j in range(i):
-                suma += (L[i][j] * U[j][k])
-            U[i][k] = (A[i][k] - suma) / L[i][i]
-
-    suma = 0
-    for j in range(n-1):
-        suma += (L[n-1][j] * U[j][n-1])
-    L[n-1][n-1] = math.sqrt(A[n-1][n-1] - suma)
-    U[n-1][n-1] = L[n-1][n-1]
-
-    la = np.around(L, decimals=4)
-    dicL[i] = copy.deepcopy(la)
-    ua = np.around(U, decimals=4)
-    dicU[i] = copy.deepcopy(ua)
-
-    print("Matriz L")
-    print(L)
-    print("Matriz U")
-    print(U)
-    z = frontSubstitution(L, b)
-    x = backSubstitution(U, z)
-    print(x)
-
-    print(x)
-    print(dicL)
-    print(dicU)
-    return (x,dicL,dicU,None)
-
+        print(x)
+        print(dicL)
+        print(dicU)
+        return (x,dicL,dicU,None)
+    else:
+        message = 'Determinant Value = 0, try again with another matrix'
+        print(message)
+        return None, None, None, message
 
 def frontSubstitution(A, b):
     n = len(A)

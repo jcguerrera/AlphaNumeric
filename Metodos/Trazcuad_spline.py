@@ -1,4 +1,5 @@
 from Metodos.GaussianElimination_splines import simpleGaussianElimination,partialGaussianElimination,totalGaussianElimination, backSubstitution, sortResult
+import numpy as np
 
 def matrix_cuad(x, b):
     a = [[0 for i in range((len(x)-1)*3)] for j in range((len(x)-1)*3)]
@@ -73,23 +74,35 @@ def traces(x):
     
 
 def trazcuad_spline(x,y,d):
-    ''' x = [-1,0,3,4]
-    y = [15.5,3,8,1]'''
+    unique_elements, count_vector_x = np.unique(x,return_counts=True)
+    unique_elements, count_vector_y = np.unique(y,return_counts=True)
+    validate = False
+    for i in count_vector_x,count_vector_y:
+        if(i.all()>1):
+            validate = True
+            break
+    if(validate):
+        message= 'There are similar points in vector X or Y'
+        return None,None, None,None, None, message
 
     b = y
     A, b = matrix_cuad(x,b)
 
+    try:
+        if(d=="T"):
+            t1=totalGaussianElimination(A, b)
+            return traces(t1[0]),A,b,t1[1],t1[0], None
 
-    if(d=="T"):
-        t1=totalGaussianElimination(A, b)
-        return traces(t1[0]),A,b,t1[1],t1[0]
+        elif(d=="P"):
+            t2=partialGaussianElimination(A, b)
+            return traces(t2[0]),A,b,t2[1],t2[0], None
+        elif(d=="S"):
+            t3=simpleGaussianElimination(A, b)
+            return traces(t3[0]),A,b,t3[1],t3[0],None
+    except:
+        message= 'Error: Division by 0'
+        return None,None, None,None, None, message
 
-    elif(d=="P"):
-        t2=partialGaussianElimination(A, b)
-        return traces(t2[0]),A,b,t2[1],t2[0]
-    elif(d=="S"):
-        t3=simpleGaussianElimination(A, b)
-        return traces(t3[0]),A,b,t3[1],t3[0]
 
 
 #print(trazcuad_spline("T")[4])
