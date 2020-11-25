@@ -28,6 +28,12 @@ def incremental_search(funcion,xi, delta, nIter):
             f_a = currentF
             currentF = sm.sympify(funcion).subs(x,current_X)
             contador = contador + 1
+
+        if (len(results) == 0):
+            response = 'Error in given data'
+            message = 'Error in given data'
+            return (None, response, message)
+
         response = "Succesful output"
         return results, response,None
 
