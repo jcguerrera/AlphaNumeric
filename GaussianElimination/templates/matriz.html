@@ -55,8 +55,9 @@
 </head>
 <div class="contenedor">
     <div class="row justify-content-center">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card">
+                <h1>Gaussian Elimination</h1>
                 <form method="POST" action="/gaussian_elimination/" class="form">
                     {% csrf_token %}
                     <div class="form-row">
@@ -77,10 +78,10 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <button id="filldetails" onclick="addFields()" class="btn btn-primary">Create</button>
+                            <button id="filldetails" onclick="addFields()" class="btn btn-outline-primary">Create</button>
                         </div>
                         <div class="form-group col-md-6">
-                            <button id="solve" type="submit" class="btn btn-success">Calculate</button>
+                            <button type="submit" class="btn btn-outline-success btn-block">Calculate</button>
                         </div>
                     </div>
                     <div id="matrix_a" class="text-align metodo"> Matrix A </div>
@@ -91,7 +92,7 @@
                 </form>
                 {% if message %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>This method does not work</strong> {{ message  }}
+                    <strong>Response</strong> {{ message  }}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

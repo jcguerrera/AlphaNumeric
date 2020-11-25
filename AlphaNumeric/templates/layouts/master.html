@@ -19,6 +19,7 @@
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <!--la graficadora-->
+    <script src="https://unpkg.com/function-plot/dist/function-plot.js"></script>
     <script type="text/javascript">
         function draw() {
             try {
@@ -42,7 +43,6 @@
             draw();
         };
     </script>
-
     {# Cargamos la librería #} {% load bootstrap4 %} {# CSS Bootstrap #} {% bootstrap_css %} {# JS y jQuery Bootstrap #}
     {% bootstrap_javascript jquery='full' %} {# JS y jQuery Bootstrap #} {% bootstrap_javascript jquery='full' %}
 </head>

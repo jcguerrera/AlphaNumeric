@@ -1,0 +1,282 @@
+{% extends 'layouts/master.html' %} {% block content %}
+<title>Crout</title>
+<head>
+    <script type='text/javascript'>
+        function addFields() {
+            // Number of inputs to create
+            var number = document.getElementById("dimension").value;
+            // Container <div> where dynamic content will be placed
+            var container_matrix = document.getElementById("matrix");
+            var container_vector = document.getElementById("vector");
+            // Clear previous contents of the container
+            while (container_matrix.hasChildNodes()) {
+                container_matrix.removeChild(container_matrix.lastChild);
+            }
+            while (container_vector.hasChildNodes()) {
+                container_vector.removeChild(container_vector.lastChild);
+            }
+            if (number > 1) {
+                for (i = 0; i < number; i++) {
+                    for (j = 0; j < number; j++) {
+                        // Append a node with a random text
+                        container_matrix.appendChild(document.createTextNode(""));
+                        // Create an <input> element for matrix A, set its type and name attributes
+                        var input = document.createElement("input");
+                        input.type = "number";
+                        input.name = "matrix" + i + j;
+                        input.style = "width : 110px;";
+                        input.step = "any";
+                        input.required = true;
+                        container_matrix.appendChild(input);
+                    }
+                    container_matrix.appendChild(document.createElement("br"));
+                    container_matrix.appendChild(document.createElement("br"));
+                    // Append a node with a random text
+                    container_vector.appendChild(document.createTextNode(""));
+                    // Create an <input> element for vector B, set its type and name attributes
+                    var vector = document.createElement("input");
+                    vector.type = "number";
+                    vector.name = "vector" + i;
+                    vector.style = "width : 90px;";
+                    vector.step = "any";
+                    vector.required = true;
+                    container_vector.appendChild(vector);
+                }
+                document.getElementById("separador").style.display = 'block';
+                document.getElementById("matrix_a").style.display = 'block';
+                document.getElementById("vector_b").style.display = 'block';
+                document.getElementById("solve").style.display = 'block';
+            }
+        }
+    </script>
+</head>
+<div class="contenedor">
+    <br>
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+            <div class="card">
+                <h1>Crout</h1>
+                <div class="container matrix">
+                    <div class="row justify-content-center sizeMatrix">
+                        <div class="col-md-12">
+                            <form method="POST" action="/crout/" class="form">
+                                {% csrf_token %}
+                                <div class="form-row">
+                                    <div class="form-group col-md-10">
+                                        <label>Matriz Size</label>
+                                        <input type="number" id="dimension" min="2" class="form-control" placeholder="Matrix dimension" name="n" step="any" required />
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                            <button id="filldetails" onclick="addFields()" class="btn btn-outline-primary">Create Matrix</button>
+                                    </div>
+
+                                </div>
+
+                                    <div id="matrix_a" class="text-align metodo"> Matrix A </div>
+                                    <div id="matrix" class="text-align"> </div>
+
+                                    <div id="vector_b" class="text-align metodo">Vector b </div>
+                                    <div id="vector" class="text-align"> </div>
+
+
+                                <div class="form-row">
+                                    <div class="form-group col-md-10">
+                                        <label> crout</label>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <button id="solve" type="submit" class="btn btn-outline-success">Solve</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <ul>
+                            {% if message%}
+                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <strong>This method does not work</strong> {{ message}}.
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                             {% endif %}
+                    {% if L and U and not P %}
+
+                    <h5>X:</h5>
+                    \begin{array}{c}
+                            {% for i in x %}
+                              {{i}}\\
+                            {% endfor %}
+                        \end{array}
+                    <div class="row justify-content-center ">
+                        <div class="col-md-12">
+                            <table class="table table-striped text-center ">
+                                <thead>
+                                    <tr>
+                                        <th>Etapa</th>
+                                        <th>Matriz L</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ul>
+                                        {% for key, value in L.items%}
+                                        <tr>
+
+                                            <th>{{ key}}</th>
+
+                                            <th>
+                                                \begin{bmatrix}
+
+                                                    {% for v in value %}
+                                                        {% for p in v %}
+                                                            {{p}}&
+                                                        {% endfor %}
+                                                    \\
+                                                    {% endfor %}
+                                                \end{bmatrix}
+                                            </th>
+                                        </tr>
+                                        {% endfor %}
+                                    </ul>
+                                </tbody>
+                            </table>
+                        <table class="table table-striped text-center ">
+                                <thead>
+                                    <tr>
+                                        <th>Etapa</th>
+                                        <th>Matriz U</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ul>
+                                        {% for key, value in U.items%}
+                                        <tr>
+                                            <th>{{ key}}</th>
+                                            <th>
+                                                \begin{bmatrix}
+
+                                                    {% for v in value %}
+                                                        {% for p in v %}
+                                                            {{p}}&
+                                                        {% endfor %}
+                                                    \\
+                                                    {% endfor %}
+                                                \end{bmatrix}
+                                            </th>
+
+                                        </tr>
+                                        {% endfor %}
+                                    </ul>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if L and U and P %}
+                        <h5>X:</h5>
+                        \begin{array}{c}
+                            {% for i in x %}
+                              {{i}}\\
+                            {% endfor %}
+                        \end{array}
+                        <div class="row justify-content-center ">
+                            <div class="col-md-12">
+                                <table class="table table-striped text-center ">
+                                <thead>
+                                    <tr>
+                                        <th>Etapa</th>
+                                        <th>Matriz L</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ul>
+                                        {% for key, value in L.items%}
+                                        <tr>
+
+                                            <th>{{ key}}</th>
+
+                                            <th>
+                                                \begin{bmatrix}
+
+                                                    {% for v in value %}
+                                                        {% for p in v %}
+                                                            {{p}}&
+                                                        {% endfor %}
+                                                    \\
+                                                    {% endfor %}
+                                                \end{bmatrix}
+                                            </th>
+                                        </tr>
+                                        {% endfor %}
+                                    </ul>
+                                </tbody>
+                            </table>
+                        <table class="table table-striped text-center ">
+                                <thead>
+                                    <tr>
+                                        <th>Etapa</th>
+                                        <th>Matriz U</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ul>
+                                        {% for key, value in U.items%}
+                                        <tr>
+                                            <th>{{ key}}</th>
+                                            <th>
+                                                \begin{bmatrix}
+
+                                                    {% for v in value %}
+                                                        {% for p in v %}
+                                                            {{p}}&
+                                                        {% endfor %}
+                                                    \\
+                                                    {% endfor %}
+                                                \end{bmatrix}
+                                            </th>
+
+                                        </tr>
+                                        {% endfor %}
+                                    </ul>
+                                </tbody>
+                            </table>
+                            <table class="table table-striped text-center ">
+                                <thead>
+                                    <tr>
+                                        <th>Etapa</th>
+                                        <th>Matriz P</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <ul>
+                                        {% for key, value in P.items%}
+                                        <tr>
+                                            <th>{{ key}}</th>
+                                            <th>
+                                                \begin{bmatrix}
+
+                                                    {% for v in value %}
+                                                        {% for p in v %}
+                                                            {{p}}&
+                                                        {% endfor %}
+                                                    \\
+                                                    {% endfor %}
+                                                \end{bmatrix}
+                                            </th>
+                                        </tr>
+                                        {% endfor %}
+                                    </ul>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    {% endif %}
+                    </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

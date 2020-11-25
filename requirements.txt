@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 asgiref==3.3.1
 astroid==2.3.3
 beautifulsoup4==4.9.3
@@ -32,6 +33,33 @@ packet==0.5
 pandas==1.0.3
 Pillow==7.0.0
 protobuf==3.11.3
+=======
+appdirs==1.4.4
+asgiref==3.3.1
+autopep8==1.5.2
+beautifulsoup4==4.9.3
+bootstrap4==0.1.0
+certifi==2020.6.20
+chardet==3.0.4
+cycler==0.10.0
+distlib==0.3.1
+dj-database-url==0.5.0
+Django==3.0.5
+django-bootstrap==0.2.4
+django-bootstrap4==2.3.1
+django-crispy-forms==1.9.0
+django-heroku==0.3.1
+filelock==3.0.12
+gunicorn==20.0.4
+idna==2.10
+importlib-metadata==2.0.0
+kiwisolver==1.2.0
+matplotlib==3.3.2
+mpmath==1.1.0
+numpy==1.19.2
+pandas==1.1.4
+Pillow==7.2.0
+>>>>>>> 42fe695a7e741b0d77ebc4e7e962cff574609525
 psycopg2==2.8.6
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
