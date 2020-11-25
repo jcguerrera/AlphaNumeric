@@ -2,15 +2,21 @@ import numpy as np
 import copy
 
 def croutt(a, b):
+    a = np.array(a)
+    b = np.array(b)
+    print('adios')
     message = ''
     dicL = {}
     dicU = {}
     cout = 0
     m, n = a.shape
+    print('ono')
     if (m !=n ):
+        print('error')
         message = ("Crout cannot be used.")#Ensure that the number of equations is equal to the number of unknowns
         return (None,None,None, message)
     else:
+        print('in')
         l = np.zeros((n,n))
         u = np.zeros((n,n))
         s1 = 0
@@ -67,6 +73,9 @@ def croutt(a, b):
         for i in range(n):
             print("x" + str(i + 1) + " = ", x[i])
 
+        print(x)
+        print(dicL)
+        print(dicU)
         return (x,dicL,dicU,None)
 
 
