@@ -1,14 +1,26 @@
 import numpy as np
 import math
+import copy
 
 def choleskyy(A, b):
+
+    A = np.array(A)
+    b = np.array(b)
     #Inicialización
     n = len(A)
     L = np.eye(n)
     U = np.eye(n)
 
+    message = ''
+    dicL = {}
+    dicU = {}
+
     #factorization
     for i in range(n-1):
+        la = np.around(L, decimals=4)
+        dicL[i] = copy.deepcopy(la)
+        ua = np.around(U, decimals=4)
+        dicU[i] = copy.deepcopy(ua)
         suma = 0
         for j in range(i):
             suma += (L[i][j] * U[j][i])
@@ -33,6 +45,11 @@ def choleskyy(A, b):
     L[n-1][n-1] = math.sqrt(A[n-1][n-1] - suma)
     U[n-1][n-1] = L[n-1][n-1]
 
+    la = np.around(L, decimals=4)
+    dicL[i] = copy.deepcopy(la)
+    ua = np.around(U, decimals=4)
+    dicU[i] = copy.deepcopy(ua)
+
     print("Matriz L")
     print(L)
     print("Matriz U")
@@ -40,6 +57,11 @@ def choleskyy(A, b):
     z = frontSubstitution(L, b)
     x = backSubstitution(U, z)
     print(x)
+
+    print(x)
+    print(dicL)
+    print(dicU)
+    return (x,dicL,dicU,None)
 
 
 def frontSubstitution(A, b):
@@ -63,9 +85,9 @@ def backSubstitution(A, b):
     return x
 
 
-A = [[4, 12, -16],
-    [12, 37, -43],
-    [-16, -43, 98]]
+#A = [[4, 12, -16],
+#    [12, 37, -43],
+#    [-16, -43, 98]]
 #A = np.array(A)
 #b = np.ones(3)
-#cholesky(A, b)   
+#choleskyy(A, b)   

@@ -81,13 +81,13 @@ def croutt(a, b):
 
 
 
-if __name__ == '__main__':            #When the module is run directly, the following code blocks will be run. When the module is imported, the code blocks will not be run.
-    a = np.array([  [4, -1, 0, 3],
-                [1, 15.5, 3, 8],
-                [0, -1.3, -4, 1.1],
-                [14, 5, -2, 30]
-                ])
-    b = np.array([1,1,1,1])
-    croutt(a, b)
+#if __name__ == '__main__':            #When the module is run directly, the following code blocks will be run. When the module is imported, the code blocks will not be run.
+#    a = np.array([  [4, -1, 0, 3],
+#                [1, 15.5, 3, 8],
+#                [0, -1.3, -4, 1.1],
+#                [14, 5, -2, 30]
+#                ])
+#    b = np.array([1,1,1,1])
+#    croutt(a, b)
 
 
