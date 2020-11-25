@@ -1,0 +1,35 @@
+read xi, xs, tolerancia, niter,  funcion
+
+fxi = f(xi)
+fxs = f(xs)
+
+if (fxi == 0)
+    write “xi es raíz”
+else if (fxs == 0)
+    write “xs es raíz”
+else if (fxi * fxs < 0 then)
+
+    xm = (xi + xs)/2
+    fxm = f(xm)
+    error = tolerancia + 1
+    count = 1
+
+    while ( fxm != 0 and error > tolerancia and contador < niter)
+        if (fxi * fxm < 0 )
+            xs = xm
+         else
+            xi = xm
+            fxi = fxm
+        end if
+
+        xaux = xm
+        xm = (xi + xs) / 2
+        fxm = f(xm)
+        error = abs(xm - xaux)
+        count = count + 1
+    end while
+
+else
+    write “el intervalo es inadecuado”
+end if
+end

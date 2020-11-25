@@ -1,0 +1,16 @@
+read x, y
+
+matriz = []
+
+while i < len(x) do
+	matriz.append([])
+	i++
+
+fila = 0
+
+for i in x do
+	j = len(x)-1
+	while j >= 0 do
+		matriz[fila].append(i**j)
+	fila++
+totalGaussianElimination(matriz,y)

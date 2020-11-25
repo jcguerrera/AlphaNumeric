@@ -1,0 +1,43 @@
+Jacobi ():
+read A
+read b
+read t
+read iter
+read x0
+n = length of A
+l = length of A [0]
+    if (n! = l):
+        write ("A is not a square matrix please check and run again.")
+    if not:
+        x = [with the size of nxn]
+        aux = 0
+        cont = 0
+        error = t + 1
+        iteration = 1
+        T = [with the size of nxn]
+        C = [with the size of n]
+ 
+        while (error> t and cont <o = iter):
+            write ("iteration: #" + str (iteration))
+            error = 0
+            for i from 0 to n:
+                sum = 0
+                 for j from 0 to n:
+                    if (i! = j):
+                        sum = sum + A [i] [j] * x0 [j]
+                        T [i] [j] = -A [i] [j] / A [i] [i]
+                        C [i] = b [i] / A [i] [i]
+                        
+                        
+                    
+                x [i] = (b [i] - sum) / A [i] [i]
+                aux = x [i] - x0 [i]
+                error = error + math.pow (aux, 2)
+               
+            error = error raised to 0.5
+
+            write (error)
+
+            for i from 0 to n:
+                x0 [i] = x [i]
+                write ("x" + i + 1 + ":" + x0 [i])

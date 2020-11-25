@@ -1,0 +1,111 @@
+def matrix_cub ():
+read x
+read b
+    a = [[0 for i from 0 to ((length (x) -1) * 4)] for j from 0 to ((length (x) -1) * 4)]
+    a [0] [0] = x [0] raised to the 3
+    a [0] [1] = x [0] raised to the 2
+    a [0] [2] = x [0]
+    a [0] [3] = 1
+    a [1] [0] = x [1] raised to the 3
+    a [1] [1] = x [1] to the power of 2
+    a [1] [2] = x [1]
+    a [1] [3] = 1
+
+    j = 4
+
+    for i from 2 to length (x):
+        a [i] [j] = x [i] raised to the 3
+        a [i] [j + 1] = x [i] raised to the 2
+        a [i] [j + 2] = x [i]
+        a [i] [j + 3] = 1
+        j + = 4
+
+    i = 1
+    j = 0
+
+    for k of length (x) up to ((length (x) raised to the 2) -2)):
+        b + = [0]
+        a [k] [j] = x [i] raised to the 3
+        a [k] [j + 1] = x [i] raised to the 2
+        a [k] [j + 2] = x [i]
+        a [k] [j + 3] = 1
+        a [k] [j + 4] = - (x [i] to the power of 3)
+        a [k] [j + 5] = - (x [i] to the power of 2)
+        a [k] [j + 6] = -x [i]
+        a [k] [j + 7] = -1
+        i + = 1
+        j + = 4
+        
+    i = 1
+    j = 0
+
+    for k from (length (x) raised to the 2) -2) to length (x) * 3 -4):
+        b + = [0]
+        a [k] [j] = 3 * (x [i] to the power of 2)
+        a [k] [j + 1] = 2 * x [i]
+        a [k] [j + 2] = 1
+        a [k] [j + 3] = 0
+        a [k] [j + 4] = - (3 * (x [i] to the power of 2))
+        a [k] [j + 5] = - (2 * x [i])
+        a [k] [j + 6] = -1
+        a [k] [j + 7] = 0
+        i + = 1
+        j + = 4
+        
+    i = 1
+    j = 0
+
+    for k from (length (x) raised to the 3) -4) to length ((x) * 4) -6):
+        b + = [0]
+        a [k] [j] = 6 * x [i]
+        a [k] [j + 1] = 2
+        a [k] [j + 2] = 0
+        a [k] [j + 3] = 0
+        a [k] [j + 4] = -6 * x [i]
+        a [k] [j + 5] = -2
+        a [k] [j + 6] = 0
+        a [k] [j + 7] = 0
+        i + = 1
+        j + = 4
+        
+    b + = [0] * 2
+    a [len (a) -2] [0] = 6 * x [0]
+    a [len (a) -2] [1] = 2
+    a [len (a) -1] [len (a) -4] = 6 * x [len (x) -1]
+    a [len (a) -1] [len (a) -3] = 2
+
+    return a, b
+
+
+
+
+def traces (x):
+    result = empty
+    j = 0
+    for i from 0 to length (x):
+        if j == 0:
+            if x [i]> = 0.0:
+                result + = "+" + x [i] + "x raised to 3"
+            else:
+                result + = x [i] + "x raised to 3"
+        elif j == 1:
+            if x [i]> = 0.0:
+                result + = "+" + x [i] + "x raised to 2"
+            else:
+                result + = x [i] + "x raised to 2"
+        elif j == 2:
+            if x [i]> = 0.0:
+                result + = "+" + x [i] + "x"
+            else:
+                result + = x [i] + "x"
+        else:
+            if x [i]> = 0.0:
+                result + = "+" + x [i] + ""
+            else:
+                result + = x [i] + ""
+            j = -1
+        j + = 1
+
+    write ("Traces: \ n")
+    for i in result.split (""):
+        write (i)

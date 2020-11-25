@@ -1,0 +1,33 @@
+leer sor A, b, x0, w, tol, Nmax:
+
+    results = {}
+
+    D = Diagonal(A)
+    L = -TraingularIferior(A) + D
+    U = -TraingularSuperiror(A) + D
+    T = Inversa(D - (w * L)) * ((1 - w) * D + (w * U))
+    C = w * Inversa(D - (w * L))*(b)
+    xant = x0
+    E = 1000
+    cont = 0
+    val = ValoresPropios(T)
+    resp = max(abs(val))
+    Mientras E > tol and cont < Nmax:
+        xact = T* xant + C
+        E = Normal(xant - xact)
+        xant = xact
+        cont = cont + 1
+        results[cont] = [float(E), xact]
+
+    fin
+
+    x = xact
+
+    escribir('Radio espectral', resp)
+    escribir('X', x)
+    escribir('T', T)
+    escribir('C', C)
+    escribir(results)
+
+
+fin
