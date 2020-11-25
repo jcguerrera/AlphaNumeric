@@ -1,0 +1,28 @@
+leer  A, b:
+
+    n = longitud(A)
+    u = MatrizCeros(n)
+    l = MatrizDiagonal(n)
+
+    para k hasta (n):
+
+        if (A[k][k] == 0):
+            A = IntercambiarFilas(A, n, k)
+        para i hasta(k + 1, n):
+            mult = A[i][k] / A[k][k]
+            l[i][k] = mult
+            para j hasta (k, n):
+                A[i][j] = A[i][j] - mult * A[k][j]
+
+        escribir('u step', k)
+        para i hasta(n):
+            u[k][i] = A[k][i]
+        escribir(u)
+
+    escribir('u', u)
+    lb = concatenarMatriz(l, b)
+    z = SustitucionProgresiva(lb)
+    uz = concatenarMatriz(u, z)
+    x = SustitucionRegresiva(uz)
+    escribir('z ', z)
+    escribir('x ', x)

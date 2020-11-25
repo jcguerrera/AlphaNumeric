@@ -1,0 +1,24 @@
+read x0, iter, tol
+fx = f(x0)
+dFx = dF(x0)
+cont = 1
+error = tol + 1
+
+while fx != 0 and error > tol and dFx != 0 and cont < iter
+    x1 = x0 - fx/dFx
+    fx = f(x1)
+    dFx = df(x1)
+    error = abs(x1 -x0)
+    x0 = x1
+    cont += 1
+end while
+
+if fx = 0
+    write "X0 is root"
+else if error < tolerancia
+    write "X0 approximate root with tolerance: tol"
+else if dfx = 0
+    write "X0 is probably a multiple root"
+else
+    write "Fail in iteration: iter"
+end if

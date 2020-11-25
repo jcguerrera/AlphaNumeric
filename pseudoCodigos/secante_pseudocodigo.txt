@@ -1,0 +1,57 @@
+read x1, x0, tol, nIteration
+
+fun0 = f (x0)
+
+if (fun0 = 0)
+
+   write "x0 is root"
+
+else
+
+     fun1 = f (x1)
+
+     cont = 0
+
+     error = tol + 1
+
+     while (fun1 <> 0 and error> tol and den <> 0 and counter <nIteration)
+
+         x2 = x1 - ((fun1 * (x1 x0)) / den)
+
+         error = absolute_value ((x2 - x1) / x2)
+
+         x0 = x1
+
+         fun0 = fun1
+
+         x1 = x2
+
+         fun1 = f (x1)
+
+         den = fun1-fun0
+
+         cont = cont + 1
+
+     end while
+
+
+
+     if (fun1 = 0)
+
+         write "x1 was found as root"
+
+     else if (error <tol)
+
+         write x1 + "Found as an approximation with a tolerance of" + tol
+
+     else if (den = 0)
+
+         write "There is a possible multiple root"
+
+     else
+
+         write "Failure in" + nIteration "+" iterations "
+
+     end if
+
+end if
